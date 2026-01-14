@@ -19,18 +19,33 @@
 
 // Image paths configuration
 #let img = (
+  // ─────────────────────────────────────────────────────────────────────────────
   // Logos
+  // ─────────────────────────────────────────────────────────────────────────────
   logo-ynov: "images/logos/logo-ynov.png",
   logo-airbus: "images/logos/logo-airbus.png",
-  // Introduction
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Introduction - Novatics Overview
+  // ─────────────────────────────────────────────────────────────────────────────
   n-eye: "images/introduction/novatics-n-eye-drone-landscape-2663x1452.png",
   n-seeker: "images/introduction/novatics-n-seeker-drone-landscape-2592x1414.png",
   n-sonar: "images/introduction/novatics-n-sonar-landscape-2499x13003.png",
   trust-zones: "images/introduction/NOV-SSI-2025-B1-A1-C1-01-zones-si-flux.png",
-  // Deliverable 1 - Capella diagrams
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Deliverable 1 - Session 1: Capella Diagrams
+  // ─────────────────────────────────────────────────────────────────────────────
   lab-diagram: "images/delivrables-1/NOV-BCRP-LAB-logical-architecture-blank.png",
   pab-diagram: "images/delivrables-1/NOV-BCRP-PAB-physical-architecture-blank.png",
   traceability-matrix: "images/delivrables-1/NOV-BCRP-traceability-matrix-physical-logical.png",
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Deliverable 1 - Session 2: EBIOS RM Diagrams
+  // ─────────────────────────────────────────────────────────────────────────────
+  ebios-vm-bs: "images/delivrables-1/NOV-SSI-2025-B1-A1-C4-D2-1-biens-supports-valeurs-metier.png",
+  ebios-er-gravite: "images/delivrables-1/NOV-SSI-2025-B1-A1-C4-D2-2-evenements-redoutes-gravite.png",
+  ebios-socle-ecarts: "images/delivrables-1/NOV-SSI-2025-B1-A1-C4-D2-3-socle-securite-ecarts.png",
 )
 
 // Modern Color System
@@ -102,7 +117,7 @@
     
     // School name - subtle
     #text(
-      size: 14pt,
+      size: 13pt,
       fill: gray500,
       tracking: 0.2em,
       weight: 500,
@@ -130,7 +145,7 @@
     #v(0.8cm)
     
     // Accent line
-    #rect(width: 80pt, height: 4pt, fill: cyan)
+    #rect(width: 150pt, height: 4pt, fill: cyan)
     
     #v(1fr)
     
@@ -148,7 +163,7 @@
     // Team section - minimal grid
     #grid(
       columns: (1fr, 1fr, 1fr),
-      gutter: 1.5cm,
+      gutter: 1.4cm,
       ..config.team.map(name => [
         #text(size: 13pt, fill: black, weight: 600)[#name]
       ])
@@ -172,16 +187,8 @@
   ]
 }
 
-// ─────────────────────────────────────────────────────────────────────────────────
-// TABLE OF CONTENTS - CLEAN
-// ─────────────────────────────────────────────────────────────────────────────────
-
 #let toc() = {
   pagebreak()
-  
-  v(1cm)
-  
-  text(size: 10pt, fill: gray400, tracking: 0.15em, weight: 500)[CONTENTS]
   
   v(0.3cm)
   
@@ -189,24 +196,22 @@
   
   v(0.2cm)
   
-  rect(width: 50pt, height: 3pt, fill: cyan)
+  rect(width: 150pt, height: 3pt, fill: cyan)
   
   v(1.5cm)
   
   show outline.entry.where(level: 1): it => {
-    v(0.5cm)
+    v(0.1cm)
     text(weight: 600, fill: black, size: 11pt)[#it]
   }
   
   show outline.entry.where(level: 2): it => {
-    v(0.15cm)
-    h(1cm)
+    v(0.1cm)
     text(fill: gray600, size: 10pt)[#it]
   }
   
   show outline.entry.where(level: 3): it => {
     v(0.1cm)
-    h(2cm)
     text(fill: gray400, size: 9pt)[#it]
   }
   
@@ -304,6 +309,38 @@
           ..header-cells.map(c => text(fill: white, weight: 600, size: 10pt)[#c])
         ),
         ..body-cells.map(c => text(size: 10pt, fill: gray700)[#c]),
+      )
+    ]
+  )
+}
+
+#let modern-table-compact(
+  columns: auto, 
+  caption: none, 
+  inset-y: 2pt, 
+  font-size: 8pt, // <-- On ajoute cet argument avec une valeur par défaut
+  ..cells
+) = {
+  let col-count = if type(columns) == array { columns.len() } else { columns }
+  let header-cells = cells.pos().slice(0, col-count)
+  let body-cells = cells.pos().slice(col-count)
+  
+  figure(
+    kind: table,
+    caption: caption,
+    block(width: 100%, clip: true)[
+      #table(
+        columns: columns,
+        inset: (x: 6pt, y: inset-y), 
+        align: left + horizon,
+        stroke: none,
+        fill: (x, y) => if y == 0 { rgb("#1a1a1a") } else if calc.odd(y) { rgb("#f5f5f5") } else { white },
+        table.header(
+          // On utilise font-size ici pour le header (+1pt pour qu'il soit un peu plus grand si tu veux)
+          ..header-cells.map(c => text(fill: white, weight: 600, size: font-size + 1pt)[#c])
+        ),
+        // On utilise font-size ici pour le corps du tableau
+        ..body-cells.map(c => text(size: font-size, fill: rgb("#333333"))[#c]),
       )
     ]
   )
@@ -460,7 +497,7 @@
         text(size: 9pt, fill: gray400, weight: 500)[#config.title],
         image(img.logo-airbus, height: 0.5cm),
       )
-      v(8pt)
+      v(1pt)
       line(length: 100%, stroke: 0.5pt + gray200)
     },
     footer: context {
@@ -492,7 +529,7 @@
   
   // Typography - Using system sans-serif fonts with fallback
   set text(
-    font: ("Helvetica Neue", "Helvetica", "Arial", "Liberation Sans", "DejaVu Sans"),
+    font: ("Liberation Sans"),
     fallback: true,
     size: 10.5pt,
     fill: gray800,
@@ -522,6 +559,8 @@
   set figure(gap: 0.8em)
   show figure.caption: it => text(size: 9pt, fill: gray500)[#it]
   
+  set heading(numbering: "1.1.1")
+
   // Setup headings
   setup-headings()
   
@@ -541,7 +580,7 @@
           text(size: 12pt, fill: gray400, weight: 500)[#config.title],
           image(img.logo-airbus, height: 1cm),
         )
-        v(8pt)
+        v(1pt)
         line(length: 100%, stroke: 0.5pt + gray200)
       }
     },
@@ -573,13 +612,21 @@
 
 #show: project
 
+#pagebreak()
+
 = Introduction
+
+#v(1em)
 
 This document presents the system architecture analysis of *Novatics*, a French deeptech company specializing in autonomous rescue robotics. The analysis was conducted using *Capella*, an open-source Model-Based Systems Engineering (MBSE) tool developed by Thales and the Eclipse Foundation.
 
 The objective is to model the Logical and Physical Architectures of the Novatics information system, establishing clear traceability between both domains to support Business Continuity and Recovery Planning (BCRP) activities.
 
+#v(1em)
+
 == Document Scope
+
+#v(1em)
 
 This deliverable covers:
 
@@ -588,22 +635,32 @@ This deliverable covers:
 - Physical Architecture Blank (PAB) with nodes, behavior components, and physical functions
 - Traceability matrix mapping physical implementations to logical specifications
 
+#v(1em)
+
 #note(title: "Modeling Approach")[
   The Capella methodology follows the Arcadia framework, progressing from Operational Analysis through System, Logical, and Physical architectures. This document focuses on the Logical and Physical layers as required for BCRP analysis.
 ]
 
+#pagebreak()
+
 = Company Overview: Novatics
+
+#v(1em)
 
 == Corporate Identity
 
+#v(1em)
+
 *Novatics SAS* is a French scale-up founded in March 2018, headquartered in Toulouse, in the heart of the European aerospace ecosystem. The company operates at the intersection of civil security, defense, and deeptech, designing autonomous reconnaissance robots for crisis situations.
+
+#v(1em)
 
 #modern-table(
   columns: (35%, 65%),
   caption: [Novatics Corporate Information],
   [Legal Name], [Novatics SAS],
   [Industry Sector], [Robotics / Defense & Civil Security / DeepTech],
-  [Founded], [March 15, 2018 — Toulouse, France],
+  [Founded], [March 15, 2018 - Toulouse, France],
   [Headquarters], [12 Avenue de l'Aéronautique, 31400 Toulouse],
   [Employees], [85 (projected 120 by end of 2026)],
   [Revenue 2024], [€8.2M (projected €12.5M in 2025)],
@@ -611,7 +668,11 @@ This deliverable covers:
   [Patents Filed], [12],
 )
 
+#v(1em)
+
 == Mission Statement
+
+#v(1em)
 
 #align(center)[
   #block(
@@ -627,13 +688,23 @@ This deliverable covers:
   ]
 ]
 
+#v(1em)
+
 The company's signature captures its philosophy: *"Technology is meaningless unless it serves humanity."*
+
+#v(1em)
 
 == Vision 2030
 
+#v(1em)
+
 By 2030, Novatics aims to become the global leader in rescue robotics, with a Novatics robot deployed in every major disaster mission on the planet. The ambitious goal is that no first responder should risk their life unnecessarily when a robot can take their place.
 
+#pagebreak()
+
 == Key Figures
+
+#v(1em)
 
 #grid(
   columns: (1fr, 1fr, 1fr, 1fr),
@@ -642,7 +713,7 @@ By 2030, Novatics aims to become the global leader in rescue robotics, with a No
     fill: gray50,
     radius: 6pt,
     inset: 16pt,
-    width: 100%,
+    width: 103%,
   )[
     #align(center)[
       #text(size: 28pt, fill: accent, weight: 700)[150+]
@@ -659,14 +730,14 @@ By 2030, Novatics aims to become the global leader in rescue robotics, with a No
     #align(center)[
       #text(size: 28pt, fill: cyan, weight: 700)[32]
       #v(4pt)
-      #text(size: 9pt, fill: gray500)[Countries of Operation]
+      #text(size: 9pt, fill: gray500)[Countries]
     ]
   ],
   block(
     fill: gray50,
     radius: 6pt,
     inset: 16pt,
-    width: 100%,
+    width: 97%,
   )[
     #align(center)[
       #text(size: 28pt, fill: amber, weight: 700)[280+]
@@ -678,7 +749,7 @@ By 2030, Novatics aims to become the global leader in rescue robotics, with a No
     fill: gray50,
     radius: 6pt,
     inset: 16pt,
-    width: 100%,
+    width: 90%,
   )[
     #align(center)[
       #text(size: 28pt, fill: emerald, weight: 700)[142]
@@ -704,9 +775,12 @@ By 2030, Novatics aims to become the global leader in rescue robotics, with a No
   [Mission Success Rate], [94%],
 )
 
+#landscape[
 == Global Presence
 
 Novatics operates from 5 physical locations across 4 continents, interconnected through a secure WAN infrastructure. The AWS cloud infrastructure in Paris (eu-west-3) serves as a virtual sixth site.
+
+#v(1em)
 
 #modern-table(
   columns: (18%, 32%, 25%, 12%, 13%),
@@ -719,17 +793,27 @@ Novatics operates from 5 physical locations across 4 continents, interconnected 
   [Lima Office], [Commercial LATAM], [Miraflores, Peru], [1], [Remote],
 )
 
+]
+
 == Product Portfolio
+
+#v(1em)
 
 Novatics designs three main autonomous robot platforms, each specialized for different crisis environments:
 
-=== N-Eye — Aerial Reconnaissance Drone
+#v(1em)
+
+=== N-Eye - Aerial Reconnaissance Drone
+
+#v(1em)
 
 The N-Eye is a multi-rotor drone designed for aerial reconnaissance in post-disaster zones. It provides real-time video and thermal imaging capabilities with autonomous flight patterns.
 
+#v(1em)
+
 #figure(
   image(img.n-eye, width: 100%),
-  caption: [N-Eye — Autonomous aerial reconnaissance drone for disaster zones],
+  caption: [N-Eye - Autonomous aerial reconnaissance drone for disaster zones],
 )
 
 #modern-table(
@@ -743,14 +827,22 @@ The N-Eye is a multi-rotor drone designed for aerial reconnaissance in post-disa
   [Certifications], [IP54, operating range -10°C to +50°C],
 )
 
-=== N-Seeker — Ground Exploration Rover
+#pagebreak()
+
+=== N-Seeker - Ground Exploration Rover
+
+#v(1em)
 
 The N-Seeker is a tracked rover designed to navigate rubble and confined spaces in search of survivors after earthquakes or building collapses.
 
+#v(1em)
+
 #figure(
   image(img.n-seeker, width: 100%),
-  caption: [N-Seeker — Ground exploration rover for rubble navigation],
+  caption: [N-Seeker - Ground exploration rover for rubble navigation],
 )
+
+#v(1em)
 
 #modern-table(
   columns: (35%, 65%),
@@ -763,14 +855,20 @@ The N-Seeker is a tracked rover designed to navigate rubble and confined spaces 
   [Protection Rating], [IP67, shock-resistant chassis],
 )
 
-=== N-Sonar — Underwater Search Unit
+#pagebreak()
+
+=== N-Sonar - Underwater Search Unit
+
+#v(1em)
 
 The N-Sonar is an autonomous underwater vehicle (AUV) designed for underwater search and rescue operations, particularly in flood scenarios or maritime accidents.
 
 #figure(
   image(img.n-sonar, width: 100%),
-  caption: [N-Sonar — Autonomous underwater vehicle for submerged search operations],
+  caption: [N-Sonar - Autonomous underwater vehicle for submerged search operations],
 )
+
+#v(1em)
 
 #modern-table(
   columns: (35%, 65%),
@@ -783,9 +881,15 @@ The N-Sonar is an autonomous underwater vehicle (AUV) designed for underwater se
   [Water Rating], [Full submersion capability],
 )
 
+#pagebreak()
+
 == The Novatics Command Center (NCC)
 
+#v(1em)
+
 The *Novatics Command Center* is the central control platform that enables operators to command and monitor robot fleets during missions. It serves as the nerve center for all field operations.
+
+#v(1em)
 
 #note(title: "NCC Core Capabilities")[
   - Real-time telemetry reception from deployed robots
@@ -794,23 +898,23 @@ The *Novatics Command Center* is the central control platform that enables opera
   - Fleet management and multi-robot coordination
   - Integration with client systems via secure APIs
 ]
+#v(1em)
 
 The NCC is deployed both as a cloud-hosted SaaS platform (for most clients) and as a deployable field station (for defense contracts requiring air-gapped operations).
 
+#v(1em)
+
 == Trust Zones Architecture
+#v(1em)
 
 Novatics has implemented a defense-in-depth architecture organized into distinct trust zones. Each zone is isolated and named using a Tolkien-inspired naming convention for easy identification.
-
-#figure(
-  image(img.trust-zones, width: 100%),
-  caption: [Novatics Trust Zones Architecture — Defense-in-depth security model],
-)
+#v(1em)
 
 #modern-table(
   columns: (20%, 25%, 55%),
   caption: [Novatics Trust Zones],
-  [Zone], [Tolkien Name], [Description],
-  [IT Corporate], [Isengard], [Corporate IT systems, office productivity, email],
+  [Zone], [Name], [Description],
+  [IT Corporate], [La Comté], [Corporate IT systems, office productivity, email, CRM],
   [R&D], [Lothlórien], [Development platforms, source code, AI training],
   [OT Industrial], [Erebor], [Factory floor SCADA/MES systems at Chambéry],
   [Cloud], [Valinor], [AWS-hosted NCC backend, client-facing services],
@@ -819,28 +923,45 @@ Novatics has implemented a defense-in-depth architecture organized into distinct
   [DR (Future)], [Mordor], [Isolated environment for classified data (II 901)],
 )
 
-== Strategic Contracts and Regulatory Context
 
-=== DGA Contract: The N-Recon Program
+#landscape[
+  #figure(
+    image(img.trust-zones, width: 76%),
+    caption: [Novatics Trust Zones Architecture - Defense-in-depth security model],
+  )
 
-#warning(title: "Strategic Defense Contract")[
-  In April 2025, Novatics signed a €4.8M contract with the French Defense Procurement Agency (DGA) for the development of CBRN reconnaissance robots. This contract involves processing classified information rated "Diffusion Restreinte" (DR), requiring compliance with the II 901 instruction.
+  == Strategic Contracts and Regulatory Context
+
+  #v(1em)
+
+  === DGA Contract: The N-Recon Program
+
+  #v(1em)
+
+  #warning(title: "Strategic Defense Contract")[
+    In April 2025, Novatics signed a €4.8M contract with the French Defense Procurement Agency (DGA) for the development of CBRN reconnaissance robots. This contract involves processing classified information rated "Diffusion Restreinte" (DR), requiring compliance with the II 901 instruction.
+  ]
+
+  #v(1em)
+
+  This contract represents a major milestone in Novatics' maturation, transforming it from an agile startup into a defense-grade supplier. The security requirements include network isolation, personnel clearances, and enhanced audit trails.
+
+  #v(1em)
+
+  === Applicable Regulatory Framework
+
+  #modern-table(
+    columns: (15%, 35%, 35%, 15%),
+    caption: [Regulatory Compliance Requirements],
+    [Framework], [Scope], [Key Requirements], [Deadline],
+    [NIS2], [Important Entity (critical IoT manufacturer)], [Governance, 24h notification, Art. 21 measures], [Oct. 2024],
+    [GDPR], [Personal data (victims, employees)], [DPO, DPIA, processing registry], [In force],
+    [II 901], [DR-classified data processing (DGA)], [Accreditation, isolation, clearances], [2026],
+    [LPM], [Potential OIV designation], [SIIV, ANSSI notification], [Monitoring],
+    [Export Control], [Dual-use goods], [Export licenses, destination control], [In force],
+  )
+
 ]
-
-This contract represents a major milestone in Novatics' maturation, transforming it from an agile startup into a defense-grade supplier. The security requirements include network isolation, personnel clearances, and enhanced audit trails.
-
-=== Applicable Regulatory Framework
-
-#modern-table(
-  columns: (15%, 35%, 35%, 15%),
-  caption: [Regulatory Compliance Requirements],
-  [Framework], [Scope], [Key Requirements], [Deadline],
-  [NIS2], [Important Entity (critical IoT manufacturer)], [Governance, 24h notification, Art. 21 measures], [Oct. 2024],
-  [GDPR], [Personal data (victims, employees)], [DPO, DPIA, processing registry], [In force],
-  [II 901], [DR-classified data processing (DGA)], [Accreditation, isolation, clearances], [2026],
-  [LPM], [Potential OIV designation], [SIIV, ANSSI notification], [Monitoring],
-  [Export Control], [Dual-use goods], [Export licenses, destination control], [In force],
-)
 
 == Cybersecurity Challenges
 
@@ -860,11 +981,19 @@ The rapid growth of Novatics presents several security challenges that the BCRP 
 - *Chambéry Factory*: Sole production facility
 - *SLAM Expertise*: Concentrated in 3 key developers
 
+#pagebreak()
+
 = Deliverable 1 - Session 1: System Architecture Modeling
+
+#v(1em)
 
 == Objectives
 
-This deliverable presents the Capella modeling of the Novatics information system, covering both the Logical Architecture Blank (LAB) and the Physical Architecture Blank (PAB).
+#v(1em)
+
+The objective of this deliverable is to create a comprehensive Capella model of the Novatics information system, focusing on the Logical and Physical Architectures. This model will serve as the foundation for subsequent Business Continuity and Recovery Planning (BCRP) activities.
+
+#v(1em)
 
 #success(title: "Deliverable Requirements")[
   *Logical Architecture (LAB):*
@@ -881,9 +1010,15 @@ This deliverable presents the Capella modeling of the Novatics information syste
   - Complete BPC → LC mapping ✓
 ]
 
+#v(1em)
+
 == Methodology
 
+#v(1em)
+
 The Capella modeling follows the Arcadia methodology:
+
+#v(1em)
 
 + *Logical Architecture (LA)*: Defines WHAT the system must do, independent of implementation
   - Logical Actors (LA): External entities interacting with the system
@@ -897,98 +1032,118 @@ The Capella modeling follows the Arcadia methodology:
 
 + *Traceability*: Links physical implementations to logical specifications through realization relationships
 
-#pagebreak()
+#landscape[
+  == Logical Architecture Blank (LAB)
 
-= Logical Architecture Blank (LAB)
+  #v(1em)
 
-The Logical Architecture describes the functional decomposition of the Novatics system, identifying the actors that interact with it and the logical components that deliver its capabilities.
+  The Logical Architecture describes the functional decomposition of the Novatics system, identifying the actors that interact with it and the logical components that deliver its capabilities.
 
-== Logical Actors (LA)
+  #v(1em)
 
-Logical Actors represent external entities that interact with the Novatics system boundary.
+  === Logical Actors (LA)
 
-#modern-table(
-  columns: (8%, 25%, 67%),
-  caption: [Logical Actors],
-  [ID], [Name], [Description],
-  [LA1], [Operations on Field], [Manages field operations including cloud services and robot-to-cloud communication],
-  [LA2], [R&D Operations], [Handles software development, AI research, and firmware engineering],
-  [LA3], [Production Operations], [Operates manufacturing systems at the Chambéry factory],
-  [LA4], [Security Services], [Provides cross-cutting security and identity management services],
-  [LA5], [Mission Operators], [Human operators piloting robots via the NCC interface],
-  [LA6], [B2B Clients], [External clients (FEMA, DGA, Red Cross) accessing the platform],
-)
+  #v(1em)
 
-== Logical Components (LC)
+  Logical Actors represent external entities that interact with the Novatics system boundary.
 
-Logical Components group related functions within each actor's domain.
+  #modern-table(
+    columns: (8%, 25%, 67%),
+    caption: [Logical Actors],
+    [ID], [Name], [Description],
+    [LA1], [Operations on Field], [Manages field operations including cloud services and robot-to-cloud communication],
+    [LA2], [R&D Operations], [Handles software development, AI research, and firmware engineering],
+    [LA3], [Production Operations], [Operates manufacturing systems at the Chambéry factory],
+    [LA4], [Security Services], [Provides cross-cutting security and identity management services],
+    [LA5], [Mission Operators], [Human operators piloting robots via the NCC interface],
+    [LA6], [B2B Clients], [External clients (FEMA, DGA, Red Cross) accessing the platform],
+  )
 
-#modern-table(
-  columns: (8%, 28%, 12%, 52%),
-  caption: [Logical Components],
-  [ID], [Name], [Parent], [Description],
-  [LC1], [NCC Backend], [LA1], [Core mission control backend processing telemetry and commands],
-  [LC2], [API Gateway], [LA1], [Exposes REST APIs to external clients with authentication],
-  [LC3], [Field Communication System], [LA1], [Handles robot-to-cloud communication via satellite],
-  [LC4], [Development Platform], [LA2], [GitLab-based platform for code, CI/CD, and AI training],
-  [LC5], [Manufacturing System], [LA3], [SCADA/MES system controlling the robot assembly line],
-  [LC6], [IAM & Security Platform], [LA4], [Keycloak SSO, Vault secrets management, and SIEM logging],
-  [LC7], [Operator Workstation], [LA5], [Console interface used by operators to pilot robots],
-  [LC8], [Client Portal], [LA6], [Web interface for clients to access mission data and reports],
-)
+  #pagebreak()
 
-#pagebreak()
+  === Logical Components (LC)
 
-== Logical Functions (LF)
+  #v(1em)
+
+  Logical Components group related functions within each actor's domain.
+
+  #v(1em)
+
+  #modern-table(
+    columns: (8%, 28%, 12%, 52%),
+    caption: [Logical Components],
+    [ID], [Name], [Parent], [Description],
+    [LC1], [NCC Backend], [LA1], [Core mission control backend processing telemetry and commands],
+    [LC2], [API Gateway], [LA1], [Exposes REST APIs to external clients with authentication],
+    [LC3], [Field Communication System], [LA1], [Handles robot-to-cloud communication via satellite],
+    [LC4], [Development Platform], [LA2], [GitLab-based platform for code, CI/CD, and AI training],
+    [LC5], [Manufacturing System], [LA3], [SCADA/MES system controlling the robot assembly line],
+    [LC6], [IAM & Security Platform], [LA4], [Keycloak SSO, Vault secrets management, and SIEM logging],
+    [LC7], [Operator Workstation], [LA5], [Console interface used by operators to pilot robots],
+    [LC8], [Client Portal], [LA6], [Web interface for clients to access mission data and reports],
+  )
+
+]
+
+=== Logical Functions (LF)
+
+#v(1em)
 
 Logical Functions define the capabilities provided by each Logical Component.
 
-#modern-table(
-  columns: (7%, 32%, 10%, 51%),
-  caption: [Logical Functions],
-  [ID], [Name], [Parent], [Description],
-  [LF01], [Receive robot telemetry], [LC1], [Ingests real-time sensor data from deployed robots],
-  [LF02], [Send piloting commands], [LC1], [Transmits navigation and action orders to robots],
-  [LF03], [Store mission data], [LC1], [Persists video, thermal, and GPS data to cloud storage],
-  [LF04], [Expose client API], [LC2], [Provides secure HTTPS endpoints for B2B clients],
-  [LF05], [Relay telemetry data], [LC3], [Relays sensor data from robots to cloud via satellite],
-  [LF06], [Manage satellite connection], [LC3], [Handles Starlink uplink and connection status],
-  [LF07], [Compile firmware], [LC4], [Builds and signs embedded software for robots],
-  [LF08], [Train AI models], [LC4], [Runs SLAM and victim detection model training on GPU],
-  [LF09], [Manage source code], [LC4], [Version control and code review via GitLab],
-  [LF10], [Supervise SCADA], [LC5], [Monitors and controls industrial equipment],
-  [LF11], [Manage ERP/MES], [LC5], [Tracks production orders and inventory],
-  [LF12], [Authenticate users], [LC6], [Validates user identity via SSO and MFA],
-  [LF13], [Monitor robot status], [LC7], [Displays real-time telemetry and robot health],
-  [LF14], [Control robot manually], [LC7], [Sends manual piloting commands to robots],
-  [LF15], [View mission reports], [LC8], [Provides access to mission summaries and archives],
-  [LF16], [Request mission support], [LC8], [Enables clients to submit new mission requests],
-)
+#v(1em)
 
-== LAB Summary
+#[
+  #set par(leading: 0.5em)
 
-#modern-table(
-  columns: (40%, 20%, 25%, 15%),
-  caption: [Logical Architecture Summary],
-  [Element], [Count], [Requirement], [Status],
-  [Logical Actors], [6], [≥ 3], [✓],
-  [Logical Components], [8], [≥ 5], [✓],
-  [Logical Functions], [16], [≥ 10], [✓],
-)
+  #modern-table-compact(
+    columns: (8%, 30%, 10%, 52%),
+    caption: [Logical Functions],
+    inset-y: 14pt,
+    [ID], [Name], [Parent], [Description],
+    [LF01], [Receive robot telemetry], [LC1], [Ingests real-time sensor data from deployed robots],
+    [LF02], [Send piloting commands], [LC1], [Transmits navigation and action orders to robots],
+    [LF03], [Store mission data], [LC1], [Persists video, thermal, and GPS data to cloud storage],
+    [LF04], [Expose client API], [LC2], [Provides secure HTTPS endpoints for B2B clients],
+    [LF05], [Relay telemetry data], [LC3], [Relays sensor data from robots to cloud via satellite],
+    [LF06], [Manage satellite connection], [LC3], [Handles Starlink uplink and connection status],
+    [LF07], [Compile firmware], [LC4], [Builds and signs embedded software for robots],
+    [LF08], [Train AI models], [LC4], [Runs SLAM and victim detection model training on GPU],
+    [LF09], [Manage source code], [LC4], [Version control and code review via GitLab],
+    [LF10], [Supervise SCADA], [LC5], [Monitors and controls industrial equipment],
+    [LF11], [Manage ERP/MES], [LC5], [Tracks production orders and inventory],
+    [LF12], [Authenticate users], [LC6], [Validates user identity via SSO and MFA],
+    [LF13], [Monitor robot status], [LC7], [Displays real-time telemetry and robot health],
+    [LF14], [Control robot manually], [LC7], [Sends manual piloting commands to robots],
+    [LF15], [View mission reports], [LC8], [Provides access to mission summaries and archives],
+    [LF16], [Request mission support], [LC8], [Enables clients to submit new mission requests],
+  )
+]
+
 
 #pagebreak()
 
-= Physical Architecture Blank (PAB)
+== Physical Architecture Blank (PAB)
+
+#v(1em)
 
 The Physical Architecture describes the concrete implementation of the system, mapping logical concepts to actual hardware infrastructure and software deployments.
 
-== Physical Nodes (PN)
+#v(1em)
+
+=== Physical Nodes (PN)
+
+#v(1em)
 
 Physical Nodes represent the hardware infrastructure hosting the Novatics system.
 
-#modern-table(
+#v(1em)
+
+#modern-table-compact(
   columns: (8%, 30%, 62%),
   caption: [Physical Nodes],
+  inset-y: 14pt,
+  font-size: 10pt,
   [ID], [Name], [Description],
   [PN1], [AWS Cloud Infrastructure], [Cloud servers in Paris region (eu-west-3) hosting mission services],
   [PN2], [R&D Server Cluster], [On-premise servers at Toulouse for development and AI training],
@@ -998,13 +1153,21 @@ Physical Nodes represent the hardware infrastructure hosting the Novatics system
   [PN6], [Satellite Gateway], [Starlink relay infrastructure for field-to-cloud communication],
 )
 
-== Behavior Physical Components (BPC)
+#pagebreak()
+
+=== Behavior Physical Components (BPC)
+
+#v(1em)
 
 Behavior Physical Components represent software services and applications deployed on Physical Nodes.
 
-#modern-table(
-  columns: (7%, 32%, 10%, 51%),
+#v(1em)
+
+#modern-table-compact(
+  columns: (10%, 29%, 10%, 51%),
   caption: [Behavior Physical Components],
+  inset-y: 15pt,
+  font-size: 9pt,
   [ID], [Name], [Parent], [Description],
   [BPC01], [Telemetry Ingestion Service], [PN1], [Receives real-time MQTT sensor data from robots],
   [BPC02], [Command Dispatcher Service], [PN1], [Sends navigation and action orders to robots],
@@ -1020,15 +1183,21 @@ Behavior Physical Components represent software services and applications deploy
   [BPC12], [Starlink Relay Agent], [PN6], [Handles satellite uplink communication protocol],
 )
 
+
 #pagebreak()
 
-== Physical Functions (PF)
+=== Physical Functions (PF)
+
+#v(1em)
 
 Physical Functions represent the concrete operations performed by each Behavior Physical Component.
 
-#modern-table(
+#v(1em)
+
+#modern-table-compact(
   columns: (7%, 36%, 10%, 47%),
-  caption: [Physical Functions (Part 1)],
+  caption: [Physical Functions],
+  inset-y: 11pt,
   [ID], [Name], [Parent], [Description],
   [PF01], [Ingest MQTT telemetry], [BPC01], [Receives MQTT streams from robot sensors],
   [PF02], [Parse sensor data], [BPC01], [Decodes video, thermal, LiDAR, and GPS data],
@@ -1040,12 +1209,6 @@ Physical Functions represent the concrete operations performed by each Behavior 
   [PF08], [Route API request], [BPC04], [Forwards requests to backend services],
   [PF09], [Build firmware binary], [BPC05], [Compiles and signs robot firmware],
   [PF10], [Run AI training job], [BPC06], [Executes SLAM/detection model training],
-)
-
-#modern-table(
-  columns: (7%, 36%, 10%, 47%),
-  caption: [Physical Functions (Part 2)],
-  [ID], [Name], [Parent], [Description],
   [PF11], [Monitor PLC status], [BPC07], [Reads sensor values from factory PLCs],
   [PF12], [Control assembly line], [BPC07], [Sends commands to assembly robots],
   [PF13], [Validate user credentials], [BPC09], [Checks user identity against directory],
@@ -1058,52 +1221,59 @@ Physical Functions represent the concrete operations performed by each Behavior 
   [PF20], [Transmit telemetry to cloud], [BPC12], [Sends robot data via satellite link],
 )
 
-== PAB Summary
-
-#modern-table(
-  columns: (45%, 15%, 25%, 15%),
-  caption: [Physical Architecture Summary],
-  [Element], [Count], [Requirement], [Status],
-  [Physical Nodes], [6], [≥ 5], [✓],
-  [Behavior Physical Components], [12], [≥ 8], [✓],
-  [Physical Functions], [20], [≥ 10], [✓],
-)
-
 #pagebreak()
 
-= Traceability Matrix
+== Traceability Matrix
+
+#v(1em)
 
 The traceability matrix establishes the realization relationships between Physical and Logical domains, ensuring that every logical capability has a corresponding physical implementation.
 
-== BPC → LC Mapping
+#v(1em)
+
+=== BPC → LC Mapping
+
+#v(1em)
 
 This table shows which Logical Component(s) each Behavior Physical Component realizes.
 
-#modern-table(
+#v(1em)
+
+#modern-table-compact(
   columns: (10%, 35%, 55%),
   caption: [BPC to LC Realization Mapping],
+  inset-y: 6pt,
+  font-size: 9pt,
   [BPC], [Behavior Physical Component], [Realized Logical Component(s)],
-  [BPC01], [Telemetry Ingestion Service], [LC1 — NCC Backend],
-  [BPC02], [Command Dispatcher Service], [LC1 — NCC Backend, LC7 — Operator Workstation],
-  [BPC03], [Mission Storage Service], [LC1 — NCC Backend, LC8 — Client Portal],
-  [BPC04], [API Gateway Service], [LC2 — API Gateway, LC8 — Client Portal],
-  [BPC05], [GitLab CI/CD Server], [LC4 — Development Platform],
-  [BPC06], [GPU Training Cluster], [LC4 — Development Platform],
-  [BPC07], [SCADA Controller], [LC5 — Manufacturing System],
-  [BPC08], [MES/ERP Module], [LC5 — Manufacturing System],
-  [BPC09], [Keycloak IAM Server], [LC6 — IAM & Security Platform],
-  [BPC10], [Vault Secrets Manager], [LC6 — IAM & Security Platform],
-  [BPC11], [Robot Onboard Computer], [LC3 — Field Communication System],
-  [BPC12], [Starlink Relay Agent], [LC3 — Field Communication System],
+  [BPC01], [Telemetry Ingestion Service], [LC1 - NCC Backend],
+  [BPC02], [Command Dispatcher Service], [LC1 - NCC Backend, LC7 - Operator Workstation],
+  [BPC03], [Mission Storage Service], [LC1 - NCC Backend, LC8 - Client Portal],
+  [BPC04], [API Gateway Service], [LC2 - API Gateway, LC8 - Client Portal],
+  [BPC05], [GitLab CI/CD Server], [LC4 - Development Platform],
+  [BPC06], [GPU Training Cluster], [LC4 - Development Platform],
+  [BPC07], [SCADA Controller], [LC5 - Manufacturing System],
+  [BPC08], [MES/ERP Module], [LC5 - Manufacturing System],
+  [BPC09], [Keycloak IAM Server], [LC6 - IAM & Security Platform],
+  [BPC10], [Vault Secrets Manager], [LC6 - IAM & Security Platform],
+  [BPC11], [Robot Onboard Computer], [LC3 - Field Communication System],
+  [BPC12], [Starlink Relay Agent], [LC3 - Field Communication System],
 )
 
-== LC → BPC Mapping
+#v(1em)
+
+=== LC → BPC Mapping
+
+#v(1em)
 
 This reverse mapping shows which BPC(s) implement each Logical Component.
 
-#modern-table(
+#v(1em)
+
+#modern-table-compact(
   columns: (10%, 35%, 55%),
   caption: [LC to BPC Implementation Mapping],
+  inset-y: 7pt,
+  font-size: 9pt,
   [LC], [Logical Component], [Implemented by BPC(s)],
   [LC1], [NCC Backend], [BPC01, BPC02, BPC03],
   [LC2], [API Gateway], [BPC04],
@@ -1119,7 +1289,15 @@ This reverse mapping shows which BPC(s) implement each Logical Component.
 
 == Traceability Validation
 
+#v(1em)
+
+The following tables validate that all Behavior Physical Components are linked to at least one Logical Component and vice versa, ensuring complete traceability.\
+
+#v(1em)
+
 === All BPC linked to at least 1 LC?
+
+#v(1em)
 
 #modern-table(
   columns: (15%, 55%, 15%, 15%),
@@ -1139,7 +1317,11 @@ This reverse mapping shows which BPC(s) implement each Logical Component.
   [BPC12], [Starlink Relay Agent], [1], [✓],
 )
 
+#pagebreak()
+
 === All LC linked to at least 1 BPC?
+
+#v(1em)
 
 #modern-table(
   columns: (15%, 55%, 15%, 15%),
@@ -1161,134 +1343,674 @@ This reverse mapping shows which BPC(s) implement each Logical Component.
   - No orphan components detected in either domain
 ]
 
-#pagebreak()
+#landscape[
+  == Capella Diagrams
 
-= Capella Diagrams
+  #v(1em)
 
-This section presents the visual representations of the Logical and Physical architectures as exported from Capella.
+  This section presents the visual representations of the Logical and Physical architectures as exported from Capella.
 
-== LAB Diagram — Logical Architecture Blank
+  #v(1em)
 
-The LAB diagram shows the hierarchical organization of Logical Actors, Logical Components, and their associated Logical Functions.
+  === LAB Diagram - Logical Architecture Blank
 
-#note(title: "Diagram Reading Guide")[
-  - *Blue boxes (outer)*: Logical Actors (LA) — system boundaries
-  - *Blue boxes (inner)*: Logical Components (LC) — functional groupings
-  - *Green boxes*: Logical Functions (LF) — capabilities
+  #v(1em)
+
+  The LAB diagram shows the hierarchical organization of Logical Actors, Logical Components, and their associated Logical Functions.
+
+  #v(1em)
+
+  #figure(
+    image(img.lab-diagram, width: 112%),
+    caption: [Logical Architecture Blank (LAB) - Actors, Components and Functions],
+  )
+
+  #pagebreak()
+
+  === PAB Diagram - Physical Architecture Blank
+
+  #v(1em)
+
+  The PAB diagram shows the deployment of Behavior Physical Components across Physical Nodes.
+
+  #figure(
+    image(img.pab-diagram, width: 92%),
+    caption: [Physical Architecture Blank (PAB) - Nodes, Behavior Components and Physical Functions],
+  )
+
+
+  #pagebreak()
+
+  === Traceability Matrix Visualization
+  
+  #v(1em)
+
+  The auto-generated Capella matrix shows the BPC to LC realization relationships.
+
+  #v(1em)
+
+  #figure(
+    image(img.traceability-matrix, width: 110%),
+    caption: [Traceability Matrix - Physical to Logical Component Realization],
+  )
 ]
 
-#figure(
-  image(img.lab-diagram, width: 100%),
-  caption: [Logical Architecture Blank (LAB) — Actors, Components and Functions],
-)
 
-The diagram illustrates the six Logical Actors and their contained components:
+// ═══════════════════════════════════════════════════════════════════════════════
+// BCRP PROJECT - Deliverable 1 - Session 2: Value & Feared Events
+// EBIOS RM Workshop 1 + Business Impact Analysis
+// ═══════════════════════════════════════════════════════════════════════════════
 
-- *Operations on Field* contains NCC Backend, API Gateway, and Field Communication System
-- *R&D Operations* contains the Development Platform
-- *Production Operations* contains the Manufacturing System
-- *Security Services* contains the IAM & Security Platform
-- *Mission Operators* contains the Operator Workstation
-- *B2B Clients* contains the Client Portal
+= Deliverable 1 - Session 2: Value & Feared Events
 
-#pagebreak()
+#v(1em)
 
-== PAB Diagram — Physical Architecture Blank
+This section presents the results of our risk identification analysis using two complementary methodologies: the *EBIOS Risk Manager* framework (ANSSI) and the *Business Impact Analysis* (NIST). Both approaches converge toward identifying what is valuable to Novatics and what events could threaten these assets.
 
-The PAB diagram shows the deployment of Behavior Physical Components across Physical Nodes.
+#v(1em)
 
-#note(title: "Diagram Reading Guide")[
-  - *Yellow boxes (outer)*: Physical Nodes (PN) — hardware infrastructure
-  - *Blue boxes (inner)*: Behavior Physical Components (BPC) — deployed services
-  - *Green boxes*: Physical Functions (PF) — concrete operations
+#note(title: "Methodological Approach")[
+  The analysis follows a three-step process:
+  - *Step 1*: Define the organizational context (covered in Session 1 - Capella analysis)
+  - *Step 2*: Identify business values and their supporting assets
+  - *Step 3*: Determine feared events and assess their severity
 ]
 
-#figure(
-  image(img.pab-diagram, width: 100%),
-  caption: [Physical Architecture Blank (PAB) — Nodes, Behavior Components and Physical Functions],
-)
+#v(1em)
 
-The diagram illustrates the six Physical Nodes and their hosted components:
+== Objectives
 
-- *AWS Cloud Infrastructure* hosts telemetry, command, storage, and API services
-- *R&D Server Cluster* hosts GitLab and GPU training infrastructure
-- *OT Industrial Network* hosts SCADA and MES/ERP systems
-- *Security Infrastructure* hosts Keycloak IAM and Vault secrets management
-- *Robot Fleet* contains the onboard computer running navigation firmware
-- *Satellite Gateway* handles Starlink relay communication
+#v(1em)
 
-#pagebreak()
+This session aims to:
+- Identify and classify *business values* (informational assets) critical to Novatics
+- Map *supporting assets* (IS components) that sustain these values
+- Characterize *feared events* and assess their severity
+- Evaluate the current *security baseline* against applicable frameworks
+- Define *recovery objectives* (MTD/RTO/RPO) for business continuity planning
 
-== Traceability Matrix Visualization
+#v(1em)
 
-The auto-generated Capella matrix shows the BPC to LC realization relationships.
+== Methodology
 
-#figure(
-  image(img.traceability-matrix, width: 100%),
-  caption: [Traceability Matrix — Physical to Logical Component Realization],
-)
+#v(1em)
 
-#pagebreak()
+The analysis combines two complementary approaches:
 
-= Conclusion
-
-This deliverable has successfully documented the system architecture of Novatics using the Capella MBSE methodology. The analysis provides a solid foundation for subsequent BCRP activities, including risk identification and continuity planning.
-
-== Summary of Achievements
+#v(1em)
 
 #modern-table(
-  columns: (25%, 25%, 15%, 20%, 15%),
-  caption: [Final Deliverable Summary],
-  [Category], [Element], [Count], [Requirement], [Status],
-  [LAB], [Logical Actors], [6], [≥ 3], [✓],
-  [LAB], [Logical Components], [8], [≥ 5], [✓],
-  [LAB], [Logical Functions], [16], [≥ 10], [✓],
-  [PAB], [Physical Nodes], [6], [≥ 5], [✓],
-  [PAB], [Behavior Physical Components], [12], [≥ 8], [✓],
-  [PAB], [Physical Functions], [20], [≥ 10], [✓],
-  [Traceability], [BPC → LC Coverage], [12/12], [100%], [✓],
-  [Traceability], [LC → BPC Coverage], [8/8], [100%], [✓],
+  columns: (18%, 38%, 44%),
+  caption: [Dual Methodology Approach],
+  [Framework], [Focus], [Deliverables],
+  [EBIOS RM], [Risk identification from threat perspective], [Business values, feared events, security baseline],
+  [BIA (NIST)], [Impact analysis from business perspective], [Recovery objectives, process priorities],
 )
 
-== Key Insights for BCRP
+#v(1em)
 
-The architecture analysis reveals several important considerations for business continuity:
+== EBIOS RM Workshop 1: Scope and Security Baseline
 
-#warning(title: "Critical Dependencies Identified")[
-  - *AWS Cloud Infrastructure (PN1)*: Single point of failure for mission-critical services
-  - *Chambéry Factory (PN3)*: Sole manufacturing facility with no redundancy
-  - *Satellite Gateway (PN6)*: Essential for field operations, dependent on Starlink availability
-  - *SLAM/AI expertise*: Concentrated in the R&D cluster with limited redundancy
-]
+#v(1em)
 
-== Next Steps
+The EBIOS Risk Manager methodology, developed by ANSSI, provides a structured approach to cybersecurity risk assessment. Workshop 1 establishes the foundation by identifying business values, supporting assets, feared events, and the current security posture.
 
-The following activities should be undertaken as part of the broader BCRP project:
+#landscape[
 
-+ *Risk Analysis*: Apply EBIOS RM methodology to identify strategic and operational risks
-+ *BIA Completion*: Conduct Business Impact Analysis for each critical component
-+ *RTO/RPO Definition*: Establish recovery objectives for each Physical Node
-+ *Continuity Strategies*: Develop redundancy and failover approaches
-+ *Testing Plan*: Design exercises to validate recovery procedures
+  === Study Framework
 
-#v(2cm)
+  #v(1em)
 
-#align(center)[
-  #block(
-    width: 100%,
-    fill: gray50,
-    inset: 1cm,
-  )[
-    #text(size: 10pt, fill: gray400, tracking: 0.1em)[PREPARED BY]
-    #v(0.5cm)
-    #text(size: 13pt, fill: black, weight: 600)[
-      Tony NGUYEN #h(0.5cm) • #h(0.5cm) Gabin COMORGE #h(0.5cm) • #h(0.5cm) Aurélien BOUDIER
-    ]
-    #v(0.8cm)
-    #text(size: 10pt, fill: gray500)[
-      #config.school \
-      #config.program \
-      #config.date
-    ]
+  #modern-table-compact(
+    inset-y: 18pt,
+    columns: (30%, 50%),
+    caption: [EBIOS RM Study Parameters],
+    font-size: 10pt,
+    [Parameter], [Value],
+    [Study Object], [Novatics SI - Global Perimeter + DR Lab],
+    [Nature], [Hybrid Industrial Information System (IT/OT/Cloud/Product)],
+    [Owner], [Alexandre DUBOIS, CEO],
+    [Security Officer], [Mei Lin ZHAO, CISO],
+    [Geographic Scope], [Toulouse (HQ), Chambéry (Factory), International Offices],
+    [Organizational Scope], [6 Trust Zones (IT, R&D, OT, Cloud, Product, DR)],
+    [Strategic Cycle], [3 years (2026-2028)],
+    [Operational Cycle], [Annual review],
+  )
+
+  #v(1em)
+
+  === Organizational Missions
+
+  #v(1em)
+
+  The missions represent the fundamental purposes of Novatics whose failure could compromise its strategic objectives. Six missions were identified and prioritized:
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (6%, 24%, 50%, 20%),
+    caption: [Novatics Mission Inventory],
+    inset-y: 11pt,
+    font-size: 10pt,
+    [ID], [Mission], [Description], [Priority],
+    [M1], [Design rescue robots], [Develop and continuously improve N-Eye, N-Seeker, and N-Sonar robots for victim search in hostile environments], chip("critical"),
+    [M2], [Produce and deliver robots], [Manufacture robots with required quality (IP68, MIL-STD-810H) and deliver to clients on time], chip("critical"),
+    [M3], [Provide operational support], [Deliver 24/7 technical support to operators during rescue missions], chip("critical"),
+    [M4], [Protect intellectual property], [Secure SLAM/AI algorithms, patents, and differentiating know-how], chip("high"),
+    [M5], [Honor contractual commitments], [Fulfill client contracts, especially DGA N-RECON (€4.8M)], chip("high"),
+    [M6], [Ensure regulatory compliance], [Comply with NIS2, GDPR, II 901 (DR perimeter), export control], chip("high"),
+  )
+
+  #v(1em)
+
+  #warning(title: "Critical Mission Justification")[
+    Missions M1, M2, and M3 are rated *Critical* because they directly impact human lives. A failure during a rescue operation could have lethal consequences. Mission M3 requires RTO < 4 hours.
   ]
+
+  == Business Values (Valeurs Métier)
+
+  #v(1em)
+
+  Business values represent the informational assets that a threat source would target to achieve its objectives. Eight essential business values were identified based on their importance to organizational missions.
+
+  #v(1em)
+
+  === Business Value Inventory
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (5%, 18%, 52%, 12%, 13%),
+    caption: [Business Value Register with DICP Classification],
+    inset-y: 9pt,
+    font-size: 10pt,
+    [ID], [Business Value], [Description], [Owner], [Criticality],
+    [VM1], [SLAM and AI Algorithms], [Source code for autonomous navigation (SLAM) and victim detection (AI). Core technological differentiator. 4+ years of R&D, 3 international patents.], [CTO], chip("critical"),
+    [VM2], [Embedded Firmware], [Robot firmware source code (N-Eye, N-Seeker, N-Sonar) and signing keys. Integrity critical for operational safety.], [CTO], chip("critical"),
+    [VM3], [Field Mission Data], [Telemetry, 3D maps, video/thermal recordings from rescue missions. Some missions generate classified data.], [COO], chip("critical"),
+    [VM4], [Production Plans], [Bill of materials, assembly procedures, robot calibration parameters. Industrial know-how.], [COO], chip("high"),
+    [VM5], [Client Data], [Contractual information, contacts, order history, support records. Odoo CRM database.], [CCO], chip("medium"),
+    [VM6], [DR Information], [Restricted Diffusion classified data related to DGA N-RECON contract. DR Lab under deployment.], [CISO], chip("critical"),
+    [VM7], [Secrets and Credentials], [Cryptographic keys, API secrets, PKI certificates, access credentials. Stored in HashiCorp Vault.], [CISO], chip("critical"),
+    [VM8], [Mission Control Process], [Ability to coordinate robots in real-time during rescue interventions via NCC.], [COO], chip("critical"),
+  )
+
+  === DICP Security Requirements
+
+  Each business value has been characterized according to the four security dimensions:
+
+  #modern-table-compact(
+    columns: (10%, 30%, 15%, 15%, 15%, 15%),
+    caption: [DICP Matrix - Business Values Security Requirements],
+    inset-y: 15pt,
+    font-size: 10pt,
+    [ID], [Business Value], [D], [I], [C], [P],
+    [VM1], [SLAM/AI Algorithms], [3], [4], [4], [3],
+    [VM2], [Embedded Firmware], [3], [4], [4], [4],
+    [VM3], [Field Mission Data], [4], [4], [3], [4],
+    [VM4], [Production Plans], [3], [4], [3], [2],
+    [VM5], [Client Data], [3], [3], [3], [3],
+    [VM6], [DR Information], [3], [4], [4], [4],
+    [VM7], [Secrets/Credentials], [4], [4], [4], [4],
+    [VM8], [Mission Control], [4], [4], [3], [4],
+  )
+
+  #note(title: "DICP Scale")[
+    *D* = Availability, *I* = Integrity, *C* = Confidentiality, *P* = Proof (Traceability). Scale: 1 (low) to 4 (critical).
+  ]
+
+  #pagebreak()
+
+  == Supporting Assets (Biens Supports)
+
+  #v(1em)
+
+  Supporting assets are the IS components on which business values rely. The identification is based on the critical asset inventory and Capella architecture analysis from Session 1.
+
+  #v(1em)
+
+  === Critical Supporting Assets
+
+  #v(1em)
+
+  Eleven critical supporting assets were identified that underpin the business values.
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (6%, 16%, 20%, 12%, 18%, 28%),
+    caption: [Supporting Assets Inventory],
+    inset-y: 5pt,
+    font-size: 9pt,
+    [ID], [Name], [Type], [Zone], [Business Values], [Criticality],
+    [BS01], [fondcombe], [GitLab CE], [R&D], [VM1, VM2], chip("critical"),
+    [BS02], [fangorn], [GPU Cluster], [R&D], [VM1], chip("high"),
+    [BS03], [anneau-unique], [HSM Thales Luna], [R&D], [VM2, VM7], chip("critical"),
+    [BS04], [miroir-galadriel], [HashiCorp Vault], [Transverse], [VM7], chip("critical"),
+    [BS05], [Novatics Cloud], [AWS EKS/RDS/S3], [Cloud], [VM3, VM8], chip("critical"),
+    [BS06], [telperion], [NCC Backend], [Cloud], [VM8], chip("critical"),
+    [BS07], [gandalf], [Keycloak IAM], [Transverse], [VM7], chip("critical"),
+    [BS08], [dale / khazad-dum], [MES / SCADA], [OT], [VM4], chip("high"),
+    [BS09], [Robots N-Series], [Products (fleet)], [Product], [VM3, VM8], chip("critical"),
+    [BS10], [Lab DR (projet)], [Classified Zone], [DR], [VM6], chip("critical"),
+    [BS11], [bree], [ERP Odoo], [IT], [VM5], chip("medium"),
+  )
+
+  === Business Value to Supporting Asset Matrix
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (19%, 7%, 7%, 7%, 7%, 7%, 7%, 7%, 7%, 7%, 7%, 7%),
+    caption: [VM/BS Correspondence Matrix - Mapping Business Values to Supporting Assets],
+    inset-y: 18pt,
+    font-size: 11pt,
+    [VM \\ BS], [BS01], [BS02], [BS03], [BS04], [BS05], [BS06], [BS07], [BS08], [BS09], [BS10], [BS11],
+    [VM1 - SLAM/AI], [●], [●], [], [], [], [], [], [], [], [], [],
+    [VM2 - Firmware], [●], [], [●], [], [], [], [], [], [], [], [],
+    [VM3 - Mission Data], [], [], [], [], [●], [], [], [], [●], [], [],
+    [VM4 - Production], [], [], [], [], [], [], [], [●], [], [], [],
+    [VM5 - Client Data], [], [], [], [], [], [], [], [], [], [], [●],
+    [VM6 - DR Info], [], [], [], [], [], [], [], [], [], [●], [],
+    [VM7 - Secrets], [], [], [●], [●], [], [], [●], [], [], [], [],
+    [VM8 - Mission Ctrl], [], [], [], [], [●], [●], [], [], [●], [], [],
+  )
+
+  #v(1cm)
+
+  #figure(
+    image(img.ebios-vm-bs, width: 78%),
+    caption: [Business Values to Supporting Assets Mapping - Visual Representation],
+  )
+
+#pagebreak()
+
+  === External Dependencies
+
+  #v(1em)
+
+  #modern-table(
+    columns: (22%, 28%, 28%, 22%),
+    caption: [Third-Party Dependencies],
+    [Third Party], [Nature], [Business Values], [Criticality],
+    [AWS (eu-west-3)], [Cloud hosting], [VM3, VM8], chip("critical"),
+    [Safyra.io], [IoT SaaS Platform], [VM8], chip("critical"),
+    [Thales], [HSM maintenance, DR training], [VM2, VM6, VM7], chip("high"),
+    [Orange Business], [MPLS Connectivity], [All], chip("high"),
+  )
+
+  #v(1em)
+
+  #danger(title: "Single Points of Failure")[
+    The dependency analysis reveals critical SPOFs:
+    - *AWS eu-west-3*: Hosts all mission-critical services (NCC, telemetry)
+    - *Safyra.io*: Essential for robot fleet management, no fallback
+    - *Orange MPLS*: Single WAN provider connecting all sites
+  ]
+
+
+  #pagebreak()
+
+  == Feared Events and Severity Assessment
+
+  #v(1em)
+
+  Feared events represent the negative impacts on business values that threat sources could cause. Twelve feared events were identified, with severity assessed on a 4-level scale.
+
+  #v(1em)
+
+  === Severity Scale Definition
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (6%, 11%, 45%, 40%),
+    caption: [Severity Scale - Novatics Context],
+    inset-y: 20pt,
+    font-size: 10pt,
+    [Level], [Label], [Generic Description], [Novatics Example],
+    [G4], [Critical], [Irreversible impacts, life endangerment, organizational survival threat], [Robot failure causing injury/death, SLAM algorithm theft],
+    [G3], [Serious], [Significant reversible impacts, major sanctions, key client loss], [DR data disclosure, NIS2 fine, DGA contract loss],
+    [G2], [Significant], [Limited impacts, temporary disruption, remediation costs], [Temporary production unavailability, minor leak],
+    [G1], [Negligible], [Minor impacts, manageable through standard processes], [Spam, isolated incident without operational impact],
+  )
+
+  #pagebreak()
+
+  === Feared Events Register
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (5%, 6%, 40%, 12%, 37%),
+    caption: [Feared Events Inventory with Severity Assessment],
+    inset-y: 8pt,
+    font-size: 10pt,
+    [ID], [VM], [Feared Event], [Severity], [Potential Impacts],
+    [ER01], [VM1], [Disclosure of SLAM/AI algorithms to competitor or hostile state], chip("critical"), [Loss of competitive advantage, patent compromise],
+    [ER02], [VM1], [Malicious alteration of AI models (backdoor, bias)], chip("critical"), [Defective robots, failed rescue missions, lives at risk],
+    [ER03], [VM2], [Firmware compromise (malicious code injection)], chip("critical"), [Robot takeover, sabotage, weaponization],
+    [ER04], [VM2], [Theft of firmware signing keys (HSM compromise)], chip("critical"), [Fraudulent signed firmware, supply chain attack],
+    [ER05], [VM3], [Mission data unavailability during intervention], chip("critical"), [Failed rescue, victims not located],
+    [ER06], [VM3], [Disclosure of classified mission data], chip("high"), [ANSSI sanctions, clearance loss, market exclusion],
+    [ER07], [VM4], [Production plan theft and industrial know-how], chip("high"), [Counterfeiting, unfair competition, market loss],
+    [ER08], [VM5], [Massive client data breach (GDPR)], chip("high"), [CNIL sanctions (4% revenue), reputation damage],
+    [ER09], [VM6], [DR information compromise (DGA contract)], chip("critical"), [DGA contract termination, criminal sanctions],
+    [ER10], [VM7], [Secrets and credentials theft (Vault compromise)], chip("critical"), [Generalized unauthorized access, total SI compromise],
+    [ER11], [VM8], [Loss of robot control during mission], chip("critical"), [Mission failure, injuries/deaths, liability],
+    [ER12], [VM8], [Malicious takeover of robot during mission], chip("critical"), [Sabotage, weaponization, international incident],
+  )
+
+  #pagebreak()
+
+  #figure(
+    image(img.ebios-er-gravite, width: 89%),
+    caption: [Feared Events Severity Distribution - Visual Analysis],
+  )
 ]
+
+=== Feared Events Summary
+
+#v(1em)
+
+The analysis reveals a concentration of critical risks (G4) on business values related to rescue operations and intellectual property:
+
+#v(1em)
+
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 12pt,
+  [
+    #block(
+      fill: rgb("#FEF2F2"),
+      stroke: (left: 3pt + rose),
+      inset: (left: 10pt, right: 10pt, y: 16pt),
+    )[
+      #text(fill: rgb("#DC2626"), weight: 700, size: 10pt)[G4 Critical Events (9)]
+      #v(6pt)
+      #text(fill: gray700, size: 10pt)[
+        - 2 related to SLAM/AI algorithms (VM1)
+        - 2 related to embedded firmware (VM2)
+        - 1 related to mission data (VM3)
+        - 1 related to DR information (VM6)
+        - 1 related to secrets/credentials (VM7)
+        - 2 related to mission control (VM8)
+      ]
+    ]
+  ],
+  [
+    #block(
+      fill: rgb("#FFFBEB"),
+      stroke: (left: 3pt + amber),
+      inset: (left: 10pt, right: 10pt, y: 16pt),
+    )[
+      #text(fill: rgb("#B45309"), weight: 700, size: 10pt)[G3 Serious Events (3)]
+      #v(6pt)
+      #text(fill: gray700, size: 10pt)[
+        - 1 related to classified mission data (VM3)
+        - 1 related to production plans (VM4)
+        - 1 related to client data / GDPR (VM5)
+      ]
+    ]
+  ],
+)
+
+#v(1em)
+
+#rect(width: 100%, height: 2pt, fill: cyan)
+
+#v(1em)
+
+#danger(title: "Risk Profile Analysis")[
+  The ratio of 9 critical events / 12 total events (75%) reflects Novatics' high-risk profile, consistent with its positioning on sensitive markets (Defense, civil security). This concentration of G4 events will be prioritized in subsequent analysis workshops.
+]
+
+#landscape[
+
+  == Security Baseline Assessment
+
+  #v(1em)
+
+  The security baseline represents security measures that the organization must apply regardless of risk analysis. It provides the first level of protection against "common" risks.
+
+  #v(1em)
+
+  === Applicable Reference Frameworks
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (18%, 25%, 15%, 42%),
+    caption: [Security Reference Framework Applicability],
+    inset-y: 18pt,
+    font-size: 10pt,
+    [Type], [Framework], [Applicability], [Novatics Scope],
+    [EU Regulatory], [NIS2 Directive], [Mandatory], [Important Entity - Manufacturing Sector],
+    [EU Regulatory], [GDPR], [Mandatory], [Client/employee personal data processing],
+    [FR Regulatory], [II 901], [Mandatory], [DR Lab - DGA N-RECON contract],
+    [FR Regulatory], [IGI 1300], [Mandatory], [Clearances, DR information protection],
+    [Normative], [ISO 27001:2022], [Target Q4 2026], [ISMS - Global perimeter],
+    [Normative], [IEC 62443], [Recommended], [OT Zone - Chambéry production],
+    [Best Practice], [ANSSI Hygiene Guide], [Recommended], [42 rules - Global perimeter],
+  )
+
+  #pagebreak()
+
+  === Compliance Status Summary
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (30%, 12%, 12%, 12%, 12%, 22%),
+    caption: [Security Baseline Compliance Status by Framework],
+    inset-y: 13pt,
+    font-size: 10pt,
+    [Framework], [Compliance], [Gaps], [Priority], [Target], [Notes],
+    [ANSSI Hygiene Guide (42 rules)], [74%], [11 rules], chip("high"), [85%], [Network segmentation gaps],
+    [NIS2 - Art. 21 (10 measures)], [65%], [4 partial], chip("critical"), [100%], [Mandatory by Oct 2024],
+    [GDPR (11 key articles)], [85%], [3 partial], chip("medium"), [95%], [DPO appointed],
+    [II 901 (18 requirements)], [25%], [14 to implement], chip("critical"), [100%], [DR Lab project],
+    [ISO 27001:2022 (7 clauses)], [60%], [Gap analysis], chip("high"), [80%], [Certification Q4 2026],
+    [IEC 62443 (6 parts)], [40%], [Gap analysis], chip("high"), [70%], [OT security plan],
+    [*Global Average*], [*58%*], [], [], [*80%*], [],
+  )
+
+  #v(1em)
+
+  #warning(title: "Compliance Gap Analysis")[
+    The global compliance rate of *58%* is below the *80%* target for ISO 27001 certification (Q4 2026). Key improvement levers: *II 901* (+50 pts via DR Lab), *IEC 62443* (+30 pts via OT security plan), *ISO 27001* (+20 pts via ISMS program).
+  ]
+
+  #pagebreak()
+
+  #figure(
+    image(img.ebios-socle-ecarts, width: 100%),
+    caption: [Security Baseline Compliance Gaps - Radar Visualization],
+  )
+
+  #v(0.5cm)
+
+  #pagebreak()
+
+  === Critical Gaps Identified
+
+  #v(1em)
+
+  #modern-table(
+    columns: (6%, 28%, 36%, 15%, 15%),
+    caption: [Major Security Gaps and Corrective Actions],
+    [ID], [Gap], [Corrective Action], [Owner], [Deadline],
+    [E01], [Backup policy not formalized], [Draft and validate ISSP backup chapter], [CISO], [Q1 2026],
+    [E02], [Default passwords on OT equipment], [Systematic audit and change + documentation], [IT Mgr], [Q1 2026],
+    [E03], [Incident procedure not tested], [Organize cyber crisis exercise], [CISO], [Q1 2026],
+    [E04], [Developer security training missing], [Deploy Secure Coding program], [CTO], [Q2 2026],
+    [E05], [ISO 27001 gap (40%)], [ISMS compliance plan], [CISO], [Q4 2026],
+    [E06], [IEC 62443 gap - OT zone], [OT security audit + remediation plan], [COO], [Q2 2026],
+    [E07], [DR Lab not II 901 compliant], [DR Lab project (design → homologation)], [CISO], [Q2 2026],
+    [E08], [NIS2 compliance partial], [Registration + Art. 21 compliance plan], [CISO], [Q4 2025],
+  )
+
+  #v(1em)
+
+  #success(title: "Study Continuation Decision")[
+    The identified gaps (Hygiene Guide: 74% compliant, ISO 27001: 60%) are significant but do not block study continuation. Risk scenarios will exploit these vulnerabilities to assess their actual severity.
+
+    *Exception*: The DR Lab perimeter (II 901) is not yet operational. Risk analysis will focus on system design to ensure compliance before production deployment.
+  ]
+
+  #pagebreak()
+
+  == Business Impact Analysis (BIA)
+
+  #v(1em)
+
+  The Business Impact Analysis provides a complementary perspective by focusing on business processes, their resource requirements, and recovery priorities. This NIST-based approach helps define quantitative recovery objectives.
+
+  #v(1em)
+
+  === Mission/Business Processes
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (8%, 22%, 70%),
+    caption: [Critical Mission/Business Processes],
+    inset-y: 16pt,
+    font-size: 11pt,
+    [ID], [Process], [Description],
+    [PM-01], [Field Mission Control], [Real-time coordination of robots during rescue operations via NCC. Requires 24/7 availability and sub-second latency.],
+    [PM-02], [R&D Development], [SLAM algorithm enhancement, AI model training, firmware development. Core innovation engine.],
+    [PM-03], [Robot Production], [Manufacturing, assembly, calibration, and quality testing at Chambéry facility.],
+    [PM-04], [24/7 Client Support], [Technical assistance to operators during missions. Critical for mission success.],
+    [PM-05], [Commercial Management], [Sales pipeline, contracts, client relationship management via Odoo CRM.],
+  )
+
+  === System Resource Components
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (8%, 25%, 22%, 45%),
+    caption: [System Resource Components for BIA],
+    inset-y: 18pt,
+    font-size: 11pt,
+    [ID], [Resource/Component], [Platform/Version], [Description],
+    [SR-01], [NCC Backend], [AWS EKS / Kubernetes], [Mission control platform - telemetry, commands, storage],
+    [SR-02], [GitLab CI/CD], [GitLab CE 16.x], [Source code repository, CI/CD pipelines],
+    [SR-03], [GPU Cluster], [NVIDIA DGX A100], [AI model training infrastructure],
+    [SR-04], [SCADA/MES], [Siemens / Custom], [Factory automation and production tracking],
+    [SR-05], [Keycloak IAM], [Keycloak 22.x], [Identity federation, SSO, access management],
+    [SR-06], [HashiCorp Vault], [Vault Enterprise], [Secrets management, PKI, encryption keys],
+    [SR-07], [Robot Fleet], [N-Eye/N-Seeker/N-Sonar], [Deployed autonomous robots with embedded systems],
+    [SR-08], [Starlink Gateway], [Starlink Business], [Satellite communication relay for field operations],
+  )
+
+  === Recovery Objectives Matrix
+
+  #v(1em)
+
+  #modern-table-compact(
+    inset-y: 16pt,
+    font-size: 11pt,
+    columns: (10%, 35%, 15%, 15%, 25%),
+    caption: [Recovery Time and Point Objectives by Process],
+    [Process], [Description], [MTD], [RTO], [RPO],
+    [PM-01], [Field Mission Control], [4 hours], [2 hours], [15 min (real-time)],
+    [PM-02], [R&D Development], [72 hours], [48 hours], [4 hours (last commit)],
+    [PM-03], [Robot Production], [48 hours], [24 hours], [8 hours (last batch)],
+    [PM-04], [24/7 Client Support], [4 hours], [2 hours], [1 hour],
+    [PM-05], [Commercial Management], [72 hours], [48 hours], [24 hours],
+  )
+
+  #v(1em)
+
+  #note(title: "Recovery Objective Definitions")[
+    - *MTD* (Maximum Tolerable Downtime): Maximum time before business impact becomes unacceptable
+    - *RTO* (Recovery Time Objective): Target time to restore service after disruption
+    - *RPO* (Recovery Point Objective): Maximum acceptable data loss measured in time
+  ]
+
+  === Recovery Priority Matrix
+
+  #v(1em)
+
+  #modern-table(
+    columns: (10%, 32%, 38%, 20%),
+    caption: [System Resource Recovery Priorities],
+    [Priority], [System Resource], [Justification], [RTO Target],
+    [1], [NCC Backend (SR-01)], [Mission-critical - human lives depend on availability], [2 hours],
+    [2], [Keycloak IAM (SR-05)], [Authentication required for all system access], [2 hours],
+    [3], [Starlink Gateway (SR-08)], [Field communication - no alternative during missions], [4 hours],
+    [4], [HashiCorp Vault (SR-06)], [Secrets required for system operations], [4 hours],
+    [5], [SCADA/MES (SR-04)], [Production continuity], [24 hours],
+  )
+
+]
+
+== Session 2 Summary
+
+#v(1em)
+
+=== EBIOS RM Workshop 1 Deliverables
+
+#v(1em)
+
+#success(title: "Workshop 1 Completed Items")[
+  - *6 missions* identified (3 critical, 3 elevated)
+  - *8 business values* inventoried with DICP classification
+  - *11 supporting assets* mapped to business values
+  - *12 feared events* characterized (9 G4, 3 G3)
+  - *Security baseline* evaluated at 58% compliance
+  - *8 major gaps* identified with corrective action plan
+]
+
+#v(1em)
+
+=== Business Impact Analysis Deliverables
+
+#v(1em)
+
+#success(title: "BIA Completed Items")[
+  - *5 mission/business processes* identified and prioritized
+  - *8 system resource components* inventoried
+  - *5 recovery priorities* established with RTO/RPO objectives
+  - *MTD/RTO/RPO matrix* defined for each critical process
+]
+
+#v(1em)
+
+=== Key Findings for BCRP Planning
+
+#v(1em)
+
+#danger(title: "Critical Risks Requiring Immediate Attention")[
+  1. *Mission Control Availability*: PM-01 requires RTO < 2h with 99.9% availability
+  2. *Single Points of Failure*: AWS eu-west-3, Safyra.io, Orange MPLS
+  3. *Intellectual Property Protection*: SLAM/AI algorithms (VM1) highest value target
+  4. *DR Lab Compliance*: II 901 at 25% - blocking for DGA contract
+  5. *OT Security Gap*: IEC 62443 at 40% - Chambéry factory exposed
+]
+
+#landscape[
+
+  === Inputs for Next Sessions
+  
+  #v(1em)
+
+  The value identification and feared events analysis provides essential inputs for subsequent BCRP activities:
+
+  #v(1em)
+
+  #modern-table(
+    columns: (22%, 43%, 35%),
+    caption: [Session 2 Outputs for BCRP Continuation],
+    [Output], [Content], [Usage],
+    [Business Values], [8 VM with DICP classification], [Prioritization of protection measures],
+    [Supporting Assets], [11 BS with criticality levels], [Technical architecture design],
+    [Feared Events], [12 ER with severity assessment], [Continuity scenario development],
+    [Recovery Objectives], [MTD/RTO/RPO per process], [Technical solution sizing],
+    [Security Gaps], [8 major gaps identified], [Risk treatment planning],
+  )
+]
+
+#v(1em)

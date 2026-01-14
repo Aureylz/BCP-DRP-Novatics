@@ -1,0 +1,253 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.9">
+  <diagram name="Socle Sécurité - Écarts" id="socle-securite">
+    <mxGraphModel dx="1765" dy="1180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gauge-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;spacing=0;arcSize=5;" value="" vertex="1">
+          <mxGeometry height="120" width="260" x="69" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontColor=#2A526E;spacing=0;verticalAlign=middle;spacingLeft=10;fontFamily=Helvetica;" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;b style=&quot;&quot;&gt;CONFORMIT&lt;/b&gt;&lt;b style=&quot;&quot;&gt;É&lt;/b&gt;&lt;b style=&quot;&quot;&gt;&amp;nbsp;GLOBALE&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="180" x="69" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=#999999;spacing=0;" value="" vertex="1">
+          <mxGeometry height="30" width="220" x="89" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-fill" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9636;strokeColor=#d79b00;spacing=0;" value="" vertex="1">
+          <mxGeometry height="30" width="128" x="89" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-pct" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontColor=#FFFFFF;spacing=0;" value="&lt;b&gt;~58%&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="50" x="119" y="128" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontColor=#666666;spacing=0;fontStyle=1" value="&lt;font&gt;Objectif certification ISO 27001 : &amp;gt;80%&lt;/font&gt;" vertex="1">
+          <mxGeometry height="20" width="220" x="89" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="ref-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B9D5F8;strokeColor=#1E40AF;spacing=0;arcSize=7;" value="" vertex="1">
+          <mxGeometry height="120" width="740" x="359" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="ref-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontColor=#2A526E;spacing=0;verticalAlign=middle;spacingLeft=10;" value="&lt;b&gt;RÉFÉRENTIELS DU SOCLE DE SÉCURITÉ&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="280" x="359" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="ref-hygiene" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#22C55E;strokeColor=#006600;spacing=0;" value="&lt;b&gt;&lt;span style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;Guide Hygiène&lt;/span&gt;&lt;br style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;span style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;ANSSI&lt;/span&gt;&lt;/b&gt;&lt;br style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;br style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;b style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;74%&lt;/b&gt;&lt;br style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;font style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;31/42 règles&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="100" x="388" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ref-nis2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7B94B;strokeColor=#994C00;spacing=0;fontColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;" value="&lt;b&gt;&lt;span style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;NIS2&lt;/span&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;span style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;Art. 21&lt;/span&gt;&lt;/b&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;b style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;65%&lt;/b&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;font style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;En cours&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="100" x="507.5" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="ref-rgpd" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#22C55E;strokeColor=#006600;spacing=0;" value="&lt;b style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;RGPD&lt;/b&gt;&lt;br style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;br style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;br style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;b style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;85%&lt;/b&gt;&lt;br style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;font style=&quot;color: rgb(255, 255, 255); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;3 écarts&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="100" x="627.5" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ref-ii901" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9636;strokeColor=#CC6600;spacing=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" value="&lt;b&gt;&lt;span style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;II 901&lt;/span&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;span style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;Lab DR&lt;/span&gt;&lt;/b&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;b style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;25%&lt;/b&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;font style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;Projet&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="100" x="747.5" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ref-iso" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7B94B;strokeColor=#994C00;spacing=0;fontColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;" value="&lt;b&gt;&lt;span style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;ISO 27001&lt;/span&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;span style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;Annexe A&lt;/span&gt;&lt;/b&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;b style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;60%&lt;/b&gt;&lt;br style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;font style=&quot;font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;Gap analysis&lt;/font&gt;" vertex="1">
+          <mxGeometry height="75" width="100" x="867.5" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ref-iec" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9636;strokeColor=#CC6600;spacing=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" value="&lt;b style=&quot;color: rgb(51, 51, 51); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;IEC&lt;/b&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;b&gt;&lt;span style=&quot;color: rgb(51, 51, 51); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;62443&lt;/span&gt;&lt;br style=&quot;color: rgb(51, 51, 51); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color: rgb(51, 51, 51); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;40%&lt;/b&gt;&lt;div&gt;&lt;b style=&quot;color: rgb(51, 51, 51); font-size: 11px; text-wrap-mode: nowrap;&quot;&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75" width="100" x="987.5" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="decision-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#047857;spacing=0;arcSize=5;" value="" vertex="1">
+          <mxGeometry height="190" width="480" x="619" y="228" as="geometry" />
+        </mxCell>
+        <mxCell id="decision-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontColor=#82b366;spacing=0;spacingLeft=10;verticalAlign=middle;" value="&lt;b&gt;&lt;font style=&quot;color: rgb(4, 120, 87);&quot;&gt;DÉCISION SUR LA POURSUITE DE L&#39;ÉTUDE&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="300" x="619" y="228" as="geometry" />
+        </mxCell>
+        <mxCell id="decision-icon" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=27;fontColor=#22C55E;fontStyle=1;spacing=0;" value="✓" vertex="1">
+          <mxGeometry height="40" width="40" x="1059" y="228" as="geometry" />
+        </mxCell>
+        <mxCell id="decision-txt" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontColor=#333333;spacing=0;" value="&lt;font&gt;&lt;b&gt;Poursuite des ateliers autorisée&lt;/b&gt;&lt;br&gt;&lt;br&gt;Les écarts identifiés (Guide hygiène : 74%, ISO 27001 : ~55%) sont significatifs mais ne&lt;/font&gt;&lt;div&gt;&lt;font&gt;bloquent&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(51, 51, 51), rgb(193, 193, 193));&quot;&gt;pas la&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(51, 51, 51), rgb(193, 193, 193));&quot;&gt;poursuite de l&#39;étude EBIOS RM.&lt;/span&gt;&lt;div&gt;&lt;div&gt;&lt;font&gt;&lt;br&gt;Les scénarios de risques (Ateliers 3-4) exploiteront ces fragilités pour en évaluer la gravité&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font&gt;réelle.&lt;br&gt;&lt;br&gt;&lt;i&gt;Exception : Le périmètre Lab DR (II 901) n&#39;est pas encore opérationnel. L&#39;analyse portera sur&lt;/i&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font&gt;&lt;i&gt;sa&amp;nbsp;&lt;/i&gt;&lt;/font&gt;&lt;i style=&quot;background-color: transparent; color: light-dark(rgb(51, 51, 51), rgb(193, 193, 193));&quot;&gt;conception.&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="140" width="467.5" x="625.25" y="262" as="geometry" />
+        </mxCell>
+        <mxCell id="roadmap-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#CC6600;spacing=0;fontColor=#FEF3C7;arcSize=4;" value="" vertex="1">
+          <mxGeometry height="140" width="480" x="619" y="439" as="geometry" />
+        </mxCell>
+        <mxCell id="roadmap-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontColor=#CC6600;spacing=0;verticalAlign=middle;spacingLeft=10;" value="&lt;b&gt;ROADMAP CONFORMITÉ 2025-2026&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="250" x="619" y="439" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-13" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#CC6600;strokeWidth=7;spacing=0;fontColor=default;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="625.25" y="482.5" as="sourcePoint" />
+            <mxPoint x="1089" y="482.26" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tl-q4-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#047857;fontSize=9;align=left;spacingLeft=3;spacing=0;" value="&lt;b&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Q4 2025&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;• NIS2 enregistrement&lt;br&gt;• Atelier 1 EBIOS&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="100" x="630.25" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="tl-q1-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;align=left;spacingLeft=3;spacing=0;" value="&lt;b&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Q1 2026&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;• Ateliers 2-5 EBIOS&lt;br&gt;• E01, E02, E03&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="100" x="748.25" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="tl-q2-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;align=left;spacingLeft=3;spacing=0;" value="&lt;b&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Q2 2026&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;• Lab DR homologation&lt;br&gt;• E04, E06, E07&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="100" x="867.25" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="tl-q4-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;align=left;spacingLeft=3;spacing=0;" value="&lt;b&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Q4 2026&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;• ISO 27001 certif&lt;br&gt;• E05 finalisé&lt;/div&gt;" vertex="1">
+          <mxGeometry height="55" width="100" x="985.25" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;spacing=0;arcSize=6;" value="" vertex="1">
+          <mxGeometry height="140" width="150" x="949" y="598" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-15" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=12;fontColor=#666666;spacing=0;verticalAlign=middle;spacingLeft=10;" value="&lt;b&gt;Légende conformité&lt;/b&gt;" vertex="1">
+          <mxGeometry height="30" width="130" x="949" y="598" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#22C55E;strokeColor=#006600;spacing=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="959" y="630.5" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-17" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;spacing=0;" value="&amp;gt; 70% Satisfaisant" vertex="1">
+          <mxGeometry height="20" width="100" x="984" y="628" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7B94B;strokeColor=#994C00;spacing=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="959" y="656.5" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-19" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;spacing=0;" value="40-70% En cours" vertex="1">
+          <mxGeometry height="20" width="100" x="984" y="654" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EF9636;strokeColor=#CC6600;spacing=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="959" y="681.5" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-21" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;spacing=0;" value="20-40% Insuffisant" vertex="1">
+          <mxGeometry height="20" width="100" x="984" y="679" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DC2626;strokeColor=#660000;spacing=0;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;" value="" vertex="1">
+          <mxGeometry height="15" width="20" x="959" y="707.5" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-23" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;spacing=0;" value="&amp;lt; 20% Critique" vertex="1">
+          <mxGeometry height="20" width="100" x="984" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-24" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="510" width="530" x="69" y="228" as="geometry" />
+        </mxCell>
+        <mxCell id="ecarts-box" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;arcSize=2;spacing=0;" value="" vertex="1">
+          <mxGeometry height="510.00000000000006" width="530" as="geometry" />
+        </mxCell>
+        <mxCell id="ecarts-title" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=13;fontColor=#b85450;spacingLeft=10;spacing=0;verticalAlign=middle;" value="&lt;b&gt;ÉCARTS MAJEURS IDENTIFIÉS (8)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="35.58139534883721" width="250" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d79b00;fontSize=11;align=left;spacingLeft=5;spacing=0;container=0;" value="&lt;b&gt;E08&lt;/b&gt; - Conformité NIS2 partielle" vertex="1">
+          <mxGeometry height="35.58139534883721" width="218" x="14.5" y="450.6976744186047" as="geometry" />
+        </mxCell>
+        <mxCell id="e8-act" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;spacing=0;container=0;fontStyle=1" value="→ Enregistrement + plan Art. 21" vertex="1">
+          <mxGeometry height="23.720930232558143" width="150" x="237.5" y="456.6279069767442" as="geometry" />
+        </mxCell>
+        <mxCell id="e8-date" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;spacing=0;container=0;" value="Q4 2025" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="400.5" y="454.2558139534884" as="geometry" />
+        </mxCell>
+        <mxCell id="e8-resp" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;spacing=0;container=0;" value="CISO" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="465.5" y="454.2558139534884" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DC2626;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=5;fontColor=#FFFFFF;spacing=0;container=0;" value="&lt;b&gt;E07&lt;/b&gt; - Lab DR non conforme II 901" vertex="1">
+          <mxGeometry height="35.58139534883721" width="218" x="14.5" y="392.58139534883725" as="geometry" />
+        </mxCell>
+        <mxCell id="e7-act" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;spacing=0;container=0;fontStyle=1" value="→ Projet Lab DR (homologation)" vertex="1">
+          <mxGeometry height="23.720930232558143" width="150" x="237.5" y="398.5116279069768" as="geometry" />
+        </mxCell>
+        <mxCell id="e7-date" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;spacing=0;container=0;" value="Q2 2026" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="400.5" y="396.13953488372096" as="geometry" />
+        </mxCell>
+        <mxCell id="e7-resp" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;spacing=0;container=0;" value="CISO" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="465.5" y="396.13953488372096" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d79b00;fontSize=11;align=left;spacingLeft=5;spacing=0;container=0;" value="&lt;b&gt;E06&lt;/b&gt; - Gap IEC 62443 zone OT" vertex="1">
+          <mxGeometry height="35.58139534883721" width="218" x="14.5" y="335.6511627906977" as="geometry" />
+        </mxCell>
+        <mxCell id="e6-act" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;spacing=0;container=0;fontStyle=1" value="→ Audit sécurité OT + remédiation" vertex="1">
+          <mxGeometry height="23.720930232558143" width="150" x="237.5" y="341.58139534883725" as="geometry" />
+        </mxCell>
+        <mxCell id="e6-date" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;spacing=0;container=0;" value="Q2 2026" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="400.5" y="339.2093023255814" as="geometry" />
+        </mxCell>
+        <mxCell id="e6-resp" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;spacing=0;container=0;" value="COO" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="465.5" y="339.2093023255814" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d79b00;fontSize=11;align=left;spacingLeft=5;spacing=0;container=0;" value="&lt;b&gt;E05&lt;/b&gt; - Gap ISO 27001 (~45%)" vertex="1">
+          <mxGeometry height="35.58139534883721" width="218" x="14.5" y="277.5348837209303" as="geometry" />
+        </mxCell>
+        <mxCell id="e5-act" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;spacing=0;container=0;fontStyle=1" value="→ Plan conformité SMSI" vertex="1">
+          <mxGeometry height="23.720930232558143" width="150" x="237.5" y="283.4651162790698" as="geometry" />
+        </mxCell>
+        <mxCell id="e5-date" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;spacing=0;container=0;" value="Q4 2026" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="400.5" y="281.093023255814" as="geometry" />
+        </mxCell>
+        <mxCell id="e5-resp" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;spacing=0;container=0;" value="CISO" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="465.5" y="281.093023255814" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=5;spacing=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;container=0;" value="&lt;b&gt;E04&lt;/b&gt; - Formation dev sécurité manquante" vertex="1">
+          <mxGeometry height="35.58139534883721" width="218" x="14.5" y="220.60465116279073" as="geometry" />
+        </mxCell>
+        <mxCell id="e4-act" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;spacing=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;container=0;fontStyle=1" value="→ Programme Secure Coding" vertex="1">
+          <mxGeometry height="23.720930232558143" width="150" x="237.5" y="226.53488372093025" as="geometry" />
+        </mxCell>
+        <mxCell id="e4-date" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;spacing=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;container=0;" value="Q2 2026" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="400.5" y="224.16279069767444" as="geometry" />
+        </mxCell>
+        <mxCell id="e4-resp" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;spacing=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;container=0;" value="CTO" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="465.5" y="224.16279069767444" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=5;spacing=0;container=0;" value="&lt;b&gt;E03&lt;/b&gt; - Procédure incidents non testée" vertex="1">
+          <mxGeometry height="35.58139534883721" width="218" x="14.5" y="162.48837209302326" as="geometry" />
+        </mxCell>
+        <mxCell id="e3-act" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;spacing=0;container=0;fontStyle=1" value="→ Exercice de crise cyber" vertex="1">
+          <mxGeometry height="23.720930232558143" width="150" x="237.5" y="168.4186046511628" as="geometry" />
+        </mxCell>
+        <mxCell id="e3-date" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;spacing=0;container=0;" value="Q1 2026" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="400.5" y="166.046511627907" as="geometry" />
+        </mxCell>
+        <mxCell id="e3-resp" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;spacing=0;container=0;" value="CISO" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="465.5" y="166.046511627907" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=5;spacing=0;container=0;" value="&lt;b&gt;E02&lt;/b&gt; - MdP par défaut équipements OT" vertex="1">
+          <mxGeometry height="35.58139534883721" width="218" x="14.5" y="105.55813953488374" as="geometry" />
+        </mxCell>
+        <mxCell id="e2-act" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;spacing=0;container=0;fontStyle=1" value="→ Audit + changement systématique" vertex="1">
+          <mxGeometry height="23.720930232558143" width="150" x="237.5" y="111.48837209302327" as="geometry" />
+        </mxCell>
+        <mxCell id="e2-date" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;spacing=0;container=0;" value="Q1 2026" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="400.5" y="109.11627906976746" as="geometry" />
+        </mxCell>
+        <mxCell id="e2-resp" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;spacing=0;container=0;" value="IT Mgr" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="465.5" y="109.11627906976746" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=5;spacing=0;container=0;" value="&lt;b&gt;E01&lt;/b&gt; - Politique sauvegarde non formalisée" vertex="1">
+          <mxGeometry height="35.58139534883721" width="218" x="14.5" y="47.441860465116285" as="geometry" />
+        </mxCell>
+        <mxCell id="e1-act" parent="noOgArqjh5RxBw9AQOcD-24" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=9;fontColor=#666666;spacing=0;container=0;fontStyle=1" value="→ Rédiger PSSI sauvegarde" vertex="1">
+          <mxGeometry height="23.720930232558143" width="150" x="237.5" y="53.37209302325582" as="geometry" />
+        </mxCell>
+        <mxCell id="e1-date" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;spacing=0;container=0;" value="Q1 2026" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="400.5" y="51.00000000000001" as="geometry" />
+        </mxCell>
+        <mxCell id="e1-resp" parent="noOgArqjh5RxBw9AQOcD-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;spacing=0;container=0;" value="CISO" vertex="1">
+          <mxGeometry height="28.46511627906977" width="50" x="465.5" y="51.00000000000001" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;dashed=1;dashPattern=8 8;fontColor=#2A526E;" value="" vertex="1">
+          <mxGeometry height="140" width="310" x="619" y="598" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-26" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontStyle=2;fontColor=#2A526E;fontFamily=Helvetica;spacing=0;spacingLeft=7;" value="EBIOS RM - Atelier 1" vertex="1">
+          <mxGeometry height="27.5" width="101" x="619" y="656.5" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-27" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=9;fontColor=#2A526E;fontFamily=Helvetica;spacing=0;spacingLeft=7;" value="&lt;span&gt;Réf:&amp;nbsp;&lt;/span&gt;&lt;b&gt;NOV-SSI-2025-B1-A1-C4-D2-3&lt;/b&gt;&lt;div&gt;&lt;span&gt;v1.0&amp;nbsp; |&amp;nbsp; 17 Déc. 2025&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="31.55" width="160" x="619" y="696.5" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-28" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#2A526E;fontFamily=Helvetica;spacing=0;spacingLeft=7;" value="&lt;div style=&quot;line-height: 70%;&quot;&gt;&lt;font style=&quot;font-size: 15px; line-height: 70%;&quot;&gt;NOVATICS -&amp;nbsp;&lt;/font&gt;&lt;font style=&quot;font-size: 12px; line-height: 70%;&quot;&gt;&lt;i&gt;Robotics for Rescue&lt;/i&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;line-height: 70%; font-size: 11px;&quot;&gt;Socle de sécurité - État de conformité et écarts&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="300" x="619" y="598" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-29" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="69.27" width="93.09" x="819" y="654.28" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-30" parent="noOgArqjh5RxBw9AQOcD-29" style="rounded=1;whiteSpace=wrap;html=1;arcSize=13;fillColor=#CCCCCC;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="39.30212765957445" width="93.09" y="29.967872340425526" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-31" parent="noOgArqjh5RxBw9AQOcD-29" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=default;fillColor=#E6E6E6;" value="" vertex="1">
+          <mxGeometry height="21.15475865909825" width="21.15475865909825" x="62.201045454545465" y="37.337021276595735" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-32" parent="noOgArqjh5RxBw9AQOcD-29" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=#000000;align=center;verticalAlign=middle;rounded=0;fontStyle=1;fontSize=14;fontColor=#F7B94B;" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;TLP:AMBER&lt;/font&gt;" vertex="1">
+          <mxGeometry height="23.581276595744676" width="78.72028909090909" x="7.184855454545464" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-33" parent="noOgArqjh5RxBw9AQOcD-29" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#E6E6E6;" value="" vertex="1">
+          <mxGeometry height="21.15475865909825" width="21.15475865909825" x="9.732136363636364" y="37.337021276595735" as="geometry" />
+        </mxCell>
+        <mxCell id="noOgArqjh5RxBw9AQOcD-34" parent="noOgArqjh5RxBw9AQOcD-29" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F7B94B;strokeWidth=2;fontColor=light-dark(#F7B94B,#EDEDED);" value="" vertex="1">
+          <mxGeometry height="21.15475865909825" width="21.15475865909825" x="35.96659090909092" y="37.337021276595735" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
