@@ -46,6 +46,20 @@
   ebios-vm-bs: "images/delivrables-1/NOV-SSI-2025-B1-A1-C4-D2-1-biens-supports-valeurs-metier.png",
   ebios-er-gravite: "images/delivrables-1/NOV-SSI-2025-B1-A1-C4-D2-2-evenements-redoutes-gravite.png",
   ebios-socle-ecarts: "images/delivrables-1/NOV-SSI-2025-B1-A1-C4-D2-3-socle-securite-ecarts.png",
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Deliverable 1 - Session 3: FTA Diagrams
+  // ─────────────────────────────────────────────────────────────────────────────
+  fta-concepts: "images/delivrables-1/NOV-BCRP-SESSION3-FIG-mtbf-mttr-rto-wrt-concepts.png",
+  fta-er02: "images/delivrables-1/NOV-BCRP-ER02-FTA-ai-model-alteration.png",
+  fta-er04: "images/delivrables-1/NOV-BCRP-ER04-FTA-firmware-key-theft.png",
+  fta-er05: "images/delivrables-1/NOV-BCRP-ER05-FTA-mission-data-unavail.png",
+  fta-er11: "images/delivrables-1/NOV-BCRP-ER11-FTA-robot-control-loss.png",
+  fta-er11-ie1: "images/delivrables-1/NOV-BCRP-ER11-IE1-FTA-c2-link-loss.png",
+  fta-er11-ie2: "images/delivrables-1/NOV-BCRP-ER11-IE2-FTA-robot-autonomy-unavail.png",
+  fta-er11-ie3: "images/delivrables-1/NOV-BCRP-ER11-IE3-FTA-mission-backend-unavail.png",
+  fta-er11-ie4: "images/delivrables-1/NOV-BCRP-ER11-IE4-FTA-credentials-unavail.png",
+  fta-er12: "images/delivrables-1/NOV-BCRP-ER12-FTA-robot-takeover.png",
 )
 
 // Modern Color System
@@ -450,6 +464,19 @@
   ]
 }
 
+#let info(title: "Info", body) = {
+  block(
+    width: 100%,
+    fill: rgb("#EFF6FF"),
+    stroke: (left: 3pt + accent-light),
+    inset: (left: 20pt, right: 20pt, y: 16pt),
+  )[
+    #text(fill: accent-light, weight: 700, size: 10pt)[#title]
+    #v(6pt)
+    #text(fill: gray700, size: 10pt)[#body]
+  ]
+}
+
 // ─────────────────────────────────────────────────────────────────────────────────
 // CODE BLOCKS
 // ─────────────────────────────────────────────────────────────────────────────────
@@ -614,31 +641,137 @@
 
 #pagebreak()
 
-= Introduction
+= Executive Summary
 
 #v(1em)
 
-This document presents the system architecture analysis of *Novatics*, a French deeptech company specializing in autonomous rescue robotics. The analysis was conducted using *Capella*, an open-source Model-Based Systems Engineering (MBSE) tool developed by Thales and the Eclipse Foundation.
-
-The objective is to model the Logical and Physical Architectures of the Novatics information system, establishing clear traceability between both domains to support Business Continuity and Recovery Planning (BCRP) activities.
+== Purpose and Scope
 
 #v(1em)
 
-== Document Scope
+This document presents a comprehensive Business Continuity and Recovery Planning (BCRP) analysis for *Novatics SAS*, a French deeptech scale-up specializing in autonomous rescue robotics. The study encompasses system architecture modeling, cybersecurity risk assessment, and quantitative fault tree analysis to establish a resilient operational framework for mission-critical rescue operations.
 
 #v(1em)
 
-This deliverable covers:
-
-- Presentation of the Novatics company and its operational context
-- Logical Architecture Blank (LAB) with actors, components, and functions
-- Physical Architecture Blank (PAB) with nodes, behavior components, and physical functions
-- Traceability matrix mapping physical implementations to logical specifications
+== Key Findings
 
 #v(1em)
 
-#note(title: "Modeling Approach")[
-  The Capella methodology follows the Arcadia framework, progressing from Operational Analysis through System, Logical, and Physical architectures. This document focuses on the Logical and Physical layers as required for BCRP analysis.
+=== Risk Profile Assessment
+
+#v(1em)
+
+The EBIOS RM analysis identified *12 feared events*, of which *9 (75%) are classified as Critical (G4)*. This elevated risk profile is consistent with Novatics' positioning in sensitive defense and civil security markets, where system failures can directly endanger human lives.
+
+#v(1em)
+
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 16pt,
+  [
+    #block(
+      fill: rgb("#FEF2F2"),
+      stroke: (left: 3pt + rose),
+      inset: (left: 14pt, right: 14pt, y: 14pt),
+    )[
+      #text(fill: rgb("#DC2626"), weight: 700, size: 11pt)[Highest Risk Events]
+      #v(8pt)
+      #text(fill: gray700, size: 10pt)[
+        *ER11* — Loss of robot control: *2.31%* unavailability \
+        *ER12* — Malicious robot takeover: *0.29%* \
+        *ER05* — Mission data unavailable: *0.22%*
+      ]
+    ]
+  ],
+  [
+    #block(
+      fill: rgb("#ECFDF5"),
+      stroke: (left: 3pt + emerald),
+      inset: (left: 14pt, right: 14pt, y: 14pt),
+    )[
+      #text(fill: rgb("#047857"), weight: 700, size: 11pt)[Security Events (Lower Probability)]
+      #v(8pt)
+      #text(fill: gray700, size: 10pt)[
+        *ER04* — Firmware key theft: *0.09%* \
+        *ER02* — AI model alteration: *0.09%* \
+        These require strong preventive controls.
+      ]
+    ]
+  ],
+)
+
+#v(1em)
+
+=== Security Baseline Status
+
+#v(1em)
+
+Global compliance stands at *58%*, below the *80%* target required for ISO 27001 certification (Q4 2026). Critical gaps include:
+
+- *II 901 compliance*: 25% — DR Lab homologation project required (Q2 2026)
+- *IEC 62443 (OT security)*: 40% — Industrial network segmentation gaps
+- *ANSSI Hygiene Guide*: 74% — 11 rules pending remediation
+- *NIS2 Article 21*: 65% — Mandatory compliance timeline active
+
+#v(1em)
+
+=== Quantitative Risk Analysis (FTA)
+
+#v(1em)
+
+Fault Tree Analysis over a 5-year system lifetime (T = 43,800h) reveals the following unavailability contributions:
+
+#v(0.5em)
+
+#modern-table-compact(
+  columns: (12%, 38%, 18%, 17%, 15%),
+  caption: [Summary of Feared Events - Unavailability over 5 Years],
+  inset-y: 12pt,
+  font-size: 10pt,
+  [Event], [Description], [Unavailability], [Downtime], [Severity],
+  [ER11], [Loss of robot control during mission], [*2.31%*], [≈1,020h], chip("critical"),
+  [ER12], [Malicious robot takeover], [*0.29%*], [≈127h], chip("critical"),
+  [ER05], [Mission data unavailability], [*0.22%*], [≈96h], chip("high"),
+  [ER04], [Firmware signing key theft], [*0.09%*], [≈39h], chip("critical"),
+  [ER02], [AI model malicious alteration], [*0.09%*], [≈39h], chip("critical"),
+)
+
+#v(1em)
+
+== Priority Recommendations
+
+#v(1em)
+
+#danger(title: "Immediate Actions (Q1 2026)")[
+  *1. Robot hardware redundancy* — Power subsystem (MTTR=100h) and sensor suite (MTTR=50h) exceed the 2-hour RTO for mission control. Hot-swap spares and redundant configurations are essential.
+  
+  *2. Security baseline remediation* — Address E01-E03 gaps: formalize backup policy, audit OT default credentials, and conduct cyber crisis exercise.
+  
+  *3. NIS2 registration* — Complete Article 21 compliance plan before regulatory deadline.
+]
+
+#v(1em)
+
+#warning(title: "Strategic Initiatives (Q2-Q4 2026)")[
+  *4. DR Lab homologation* — Complete II 901 compliance for DGA contract continuity.
+  
+  *5. ML security program* — Training pipeline security and model integrity verification to mitigate ER02 risk (dominant vector: pipeline poisoning at γ=3×10⁻⁴).
+  
+  *6. ISO 27001 certification* — Progress from 60% to 80% compliance through ISMS implementation.
+]
+
+#v(1em)
+
+== Document Structure
+
+#v(1em)
+
+This deliverable is organized into three sessions covering system architecture modeling (Capella LAB/PAB), risk identification (EBIOS RM + BIA), and quantitative reliability analysis (Fault Tree Analysis). All 5 feared events have been modeled with MTBF/MTTR parameters, enabling data-driven prioritization of continuity investments.
+
+#v(1em)
+
+#note(title: "Methodological Framework")[
+  The analysis integrates *Capella* (Arcadia/MBSE) for architecture modeling, *EBIOS RM* (ANSSI) for threat-centric risk identification, *BIA* (NIST) for business impact quantification, and *Arbre Analyst/OPSA* for fault tree computation. This multi-methodology approach ensures comprehensive coverage of both operational and security risks.
 ]
 
 #pagebreak()
@@ -2014,3 +2147,782 @@ The analysis reveals a concentration of critical risks (G4) on business values r
 ]
 
 #v(1em)
+
+
+// =============================================================================
+// SESSION 3 — FAULT TREE ANALYSIS & RELIABILITY METRICS
+// BCRP Project - Novatics System
+// Horizon: 5 years (43,800 hours)
+// =============================================================================
+
+= Deliverable 1 - Session 3: Fault Tree Analysis & Reliability
+
+#v(1em)
+
+== Introduction
+
+#v(0.5em)
+
+This session establishes the quantitative reliability framework for the Novatics system's Business Continuity and Recovery Planning (BCRP). Building upon the risk analysis from Sessions 1 and 2, we now quantify the probability of occurrence for each feared event using Fault Tree Analysis (FTA) with justified MTBF (Mean Time Between Failures) and MTTR (Mean Time To Repair) parameters.
+
+#v(0.5em)
+
+#info(title: "Session 3 Deliverables")[
+  - *5 Feared Events* with complete Fault Tree Analysis
+  - *System lifetime definition*: 5 years = 43,800 hours
+  - *Probability models*: GLM (repairable) and Gamma (one-time events)
+  - *Justified MTBF/MTTR values* with budget decomposition
+  - *Arbre Analyst files* (.opsa) for each feared event
+]
+
+#v(1em)
+
+== Reliability Fundamentals
+
+#v(0.5em)
+
+=== Key Metrics Definitions
+
+#v(0.5em)
+
+#modern-table-compact(
+  columns: (10%, 28%, 62%),
+  caption: [Reliability Metrics Definitions],
+  inset-y: 8pt,
+  font-size: 9pt,
+  [Metric], [Full Name], [Definition],
+  [*MTBF*], [Mean Time Between Failures], [Average operating time between consecutive failures (hours). For exponential model: MTBF = 1/λ],
+  [*MTTF*], [Mean Time To (first) Failure], [Average time to first failure for non-repairable items],
+  [*MTTR*], [Mean Time To Repair], [Average time to restore system after failure. Includes detection, diagnosis, repair, and validation],
+  [*MUT*], [Mean Up Time], [Average operational time after a repair cycle],
+  [*MDT*], [Mean Down Time], [Average downtime per failure occurrence],
+  [*λ*], [Failure Rate], [Number of failures per hour. λ = 1/MTBF],
+  [*μ*], [Repair Rate], [Number of repairs per hour. μ = 1/MTTR],
+)
+
+#v(0.5em)
+
+=== Probability Models Used
+
+#v(0.5em)
+
+==== GLM Model (Repairable Systems)
+
+The Generalized Linear Model (GLM) is used for repairable components that can fail and be restored multiple times over the system lifetime. The instantaneous unavailability is given by:
+
+#align(center)[
+  #box(
+    fill: gray100,
+    inset: 12pt,
+    radius: 4pt,
+  )[
+    #set text(size: 15pt)
+    $Q(t) = frac(lambda, lambda + mu) (1 - e^(-(lambda + mu)t)) + gamma dot e^(-(lambda + mu)t)$
+  ]
+]
+
+Where:
+- *$lambda$* = failure rate (1/MTBF)
+- *$mu$* = repair rate (1/MTTR)
+- *$gamma$* = initial unavailability (default: 0)
+- *$t$* = mission time (hours)
+
+#v(1em)
+
+*Asymptotic unavailability* (steady-state) :
+#align(center)[
+  #box(
+    fill: gray100,
+    inset: 12pt,
+    radius: 4pt,
+  
+  )[
+    #set text(size: 15pt)
+    $Q_infinity = frac(lambda, lambda + mu) = frac("MTTR", "MTBF" + "MTTR")$
+  ]
+]
+
+#v(1em)
+
+==== Gamma Model (One-Time Events)
+
+For events that occur at most once over the system lifetime (e.g., security compromises, insider threats), we use a constant probability *$gamma$* (constant over mission) representing the likelihood of occurrence over the entire horizon:
+
+#align(center)[
+  #box(
+    fill: gray100,
+    inset: 12pt,
+    radius: 4pt,
+  )[
+    #set text(size: 15pt)
+    $Q(t) = gamma$
+  ]
+]
+
+#v(1em)
+
+=== MTTR Budget Decomposition
+
+#v(1em)
+
+#warning(title: "Critical Point - Session 3")[
+  The MTTR used in FTA *must include* the Time To Detect (TTD). This is often overlooked but essential for accurate availability calculations.
+  
+  *MTTR (FTA) = TTD + Diagnosis + Remediation + Validation = RTO + WRT*
+]
+
+#v(1em)
+
+#modern-table-compact(
+  columns: (18%, 20%, 62%),
+  caption: [MTTR Budget Components],
+  inset-y: 11pt,
+  font-size: 9pt,
+  [Component], [Typical Range], [Description],
+  [*TTD*], [5 min – 2 hours], [Time To Detect: Monitoring alerts, incident detection, initial triage],
+  [*Diagnosis*], [15 min – 4 hours], [Root cause analysis, impact assessment, decision making],
+  [*Remediation*], [30 min – 72 hours], [Actual repair: restart, failover, replacement, restore, rebuild],
+  [*Validation*], [10 min – 8 hours], [Functional testing, security verification, return to nominal],
+)
+
+#v(1em)
+
+*The relationship with PCA/PRA metrics:*
+- *RTO* (Recovery Time Objective) ≈ TTD + Diagnosis + Remediation
+- *WRT* (Work Recovery Time) ≈ Validation phase
+- *MTTR* = RTO + WRT
+
+
+#landscape[
+
+
+  #figure(
+    image(img.fta-concepts, width: 110%),
+    caption: [MTBF/MTTR/RTO/WRT definitions and relationships. The MTTR used in FTA includes TTD (Time To Detect). Novatics context: 5-year horizon (43,800h), 99.9% availability target, critical RTO (PM-01) = 2 hours.],
+  ) <fig-mtbf-mttr-concepts>
+
+
+
+  == System Lifetime and Assumptions
+
+  #v(0.5em)
+
+  #success(title: "Novatics System Parameters")[
+    - *Analysis horizon*: T = 5 years = *43,800 hours*
+    - *Initial state*: All systems fully operational at t=0 (γ₀ = 0)
+    - *Operating regime*: Normal operational domain (constant λ)
+    - *Target availability*: 99.9% for mission-critical functions (PM-01)
+  ]
+
+  #v(1em)
+
+  === Alignment with Session 2 Recovery Objectives
+
+  #v(1em)
+
+  #modern-table-compact(
+    columns: (20%, 20%, 20%, 40%),
+    caption: [Recovery Objectives from BIA (Session 2)],
+    inset-y: 14pt,
+    font-size: 11pt,
+    [Process], [RTO], [RPO], [MTTR Constraint for FTA],
+    [PM-01 (Mission Control)], [2 hours], [15 min], [MTTR ≤ 2h for critical path components],
+    [PM-02 (R&D)], [48 hours], [4 hours], [MTTR ≤ 48h acceptable],
+    [PM-03 (Production)], [24 hours], [8 hours], [MTTR ≤ 24h for OT systems],
+    [PM-04 (Support)], [2 hours], [1 hour], [MTTR ≤ 2h for IAM/communications],
+    [PM-05 (Commercial)], [48 hours], [24 hours], [MTTR ≤ 48h acceptable],
+  )
+
+  == Feared Events and Fault Tree Analysis
+
+  #v(0.5em)
+
+  === Overview of Analyzed Feared Events
+
+  #v(0.5em)
+
+  #modern-table-compact(
+    columns: (8%, 32%, 25%, 35%),
+    caption: [Summary of 5 Feared Events with FTA],
+    inset-y: 5pt,
+    font-size: 9pt,
+    [ID], [Feared Event], [Primary Model], [Key Parameters],
+    [ER11], [Loss of robot control during mission], [GLM (repairable)], [MTBF: 5,000–100,000h, MTTR: 0.2–100h],
+    [ER05], [Unavailability of mission data], [GLM + Gamma], [MTBF: 10,000–100,000h, MTTR: 2–80h],
+    [ER12], [Malicious takeover of robot], [GLM + Gamma], [MTBF: 10,000h, Gamma: 1e-4 to 2e-4],
+    [ER04], [Theft of firmware signing keys], [Gamma + MTTR], [Gamma: 1e-4 to 3e-4, MTTR: 48–96h],
+    [ER02], [Malicious alteration of AI models], [Gamma + MTTR], [Gamma: 1e-4 to 3e-4, MTTR: 48–96h],
+  )
+
+  #v(0.5em)
+
+  === ER11 — Loss of Robot Control During Mission
+
+  #v(0.5em)
+
+  #danger(title: "Feared Event ER11")[
+    - *Description*: Loss of the ability to control one or more robots during a mission, resulting in mission failure and potential safety risk to personnel.
+    - *Severity*: G4 (Critical) — Direct impact on Safety of Life (SoL) missions
+    - *Business Impact*: PM-01 (Field Mission Control) with RTO = 2 hours
+  ]
+
+  #v(0.5em)
+
+  #figure(
+    image(img.fta-er11, width: 100%),
+    caption: [ER11 Fault Tree: Loss of robot control during mission. Severity G4 (Critical). $Q(T) approx 2.31%$. OR-gate structure with 4 intermediate events (IE1-IE4).],
+  ) <fig-er11-fta>
+  
+  ==== Fault Tree Structure
+
+  The top event "Loss of robot control" is modeled as an OR gate combining four intermediate events:
+
+  #v(0.5em)
+
+  #modern-table-compact(
+    columns: (12%, 35%, 53%),
+    caption: [ER11 - Intermediate Events Structure],
+    inset-y:6pt,
+    font-size: 9pt,
+    [ID], [Intermediate Event], [Description],
+    [IE1], [Loss of command & control link], [C2 link unavailable due to network, relay, or security device failure],
+    [IE2], [Robot autonomy unavailable], [Robot cannot execute safety/navigation functions autonomously],
+    [IE3], [Mission control backend unavailable], [Backend systems for supervision and mission piloting are down],
+    [IE4], [Critical credentials unavailable], [Keys, certificates, or secrets required for secure operation are invalid or inaccessible],
+  )
+
+  ==== Basic Events and MTBF/MTTR Justification
+
+  #v(1em)
+
+
+  #modern-table-compact(
+    columns: (24%, 12%,32%, 32%),
+    caption: [ER11 - Basic Events with MTBF/MTTR Justification],
+    font-size: 8pt,
+    inset-y: 3pt,
+    [Basic Event], [Parameters], [MTBF Justification], [MTTR Budget],
+
+    [BE_Primary_comm_link_failure], [- MTBF=10,000h
+    - MTTR=4h], [Critical network: ~0.9 incidents/year (8760/10000). Enterprise-grade SLA assumption.], [TTD 0.25h + Diag 0.75h + Failover 2h + Validation 1h],
+
+    [BE_Ground_relay_failure], [- MTBF=5,000h
+    - MTTR=8h], [Field equipment more exposed (power/environment) → lower MTBF. Starlink gateway or ground station.], [TTD 0.5h + Diag 1.5h + Field intervention 4h + Tests 2h],
+
+    [BE_Network_security_device_outage], [- MTBF=10,000h
+    - MTTR=5h], [Enterprise firewall/VPN appliance stable; incidents often config/firmware related.], [TTD 0.25h + Diag 1h + Restart/rollback 2.5h + Validation 1.25h],
+
+    [BE_DNS_or_PKI_resolution_failure], [- MTBF=5,000h
+    - MTTR=1h], [DNS/PKI incidents possible (chain validation, ACME renewal, resolution issues).], [TTD 0.1h + Diag 0.2h + Fix 0.5h + Validation 0.2h],
+
+    [BE_Safety_controller_failure], [- MTBF=20,000h
+    - MTTR=20h], [Certified safety-critical hardware → higher MTBF (SIL-rated).], [Diag 2h + Replacement/intervention 16h + Recalibration 2h],
+
+    [BE_Navigation_stack_failure], [- MTBF=5,000h
+    - MTTR=0.2h], [Software crash plausible (edge cases, sensor data anomalies). Auto-restart enabled.], [Detection 5min + Restart 5min + Validation 2min],
+
+    [BE_Sensor_suite_failure], [- MTBF=10,000h
+    - MTTR=50h], [Sensors exposed (shocks, dust, humidity) → hardware failures possible.], [Diag 2h + Logistics/return 40h + Recalibration 8h],
+
+    [BE_Power_subsystem_failure], [- MTBF=10,000h
+    - MTTR=100h], [Conservative assumption (battery/BMS + mission constraints).], [Diag 4h + Logistics/replacement 80h + Safety tests 16h],
+
+    [BE_Mission_control_app_outage], [- MTBF=5,000h
+    - MTTR=1h], [Application incidents several times/year (assumption).], [Alert 0.1h + Diag 0.2h + Restart/rollback 0.5h + Validation 0.2h],
+
+    [BE_Database_or_storage_outage], [- MTBF=10,000h
+    - MTTR=5h], [Data layer stable but failures longer (failover/restore).], [TTD 0.25h + Diag 0.75h + Failover/restore 3h + Validation 1h],
+
+    [BE_IAM_or_IdP_outage], [- MTBF=10,000h
+    - MTTR=2h], [IAM stable; incidents rare but impactful (auth dependency).], [Alert 0.1h + Diag 0.4h + Restart/failover 1h + Validation 0.5h],
+
+    [BE_Failed_deployment_or_change], [- MTBF=20,000h
+    - MTTR=20h], [Major change incident assumed rare (~0.4/year).], [Detection 1h + Diag 3h + Rollback/hotfix 12h + Revalidation 4h],
+
+    [BE_Cloud_region_or_DC_outage], [- MTBF=100,000h
+    - MTTR=80h], [Very rare (multi-year scale). AWS eu-west-3 historical data.], [Alert 1h + Decision 3h + DR site recovery 72h + Validation 4h],
+
+    [BE_Vault_service_unavailable], [- MTBF=10,000h
+    - MTTR=5h], [Critical service dependent on storage/network; average stability.], [TTD 0.25h + Diag 0.75h + Restore/failover 3h + Validation 1h],
+
+    [BE_Certificates_expired], [- Gamma=2e-4
+    - MTTR=1h], [Process event (expiration): low probability if automation/monitoring.], [Alert 0.1h + Renewal 0.4h + Deploy/validation 0.5h],
+
+    [BE_Key_management_service_unavailable], [- MTBF=10,000h
+    - MTTR=5h], [Crypto service with dependencies (HSM/storage).], [TTD 0.25h + Diag 0.75h + Restore/failover 3h + Validation 1h],
+
+    [BE_HSM_unavailable], [- MTBF=20,000h
+    - MTTR=20h], [HSM robust, failures rare. Luna Network HSM specifications.], [Diag 1h + Exchange/maintenance 16h + Revalidation/sync 3h],
+  )
+
+]
+
+==== ER11 Quantitative Results
+
+#v(1em)
+
+#modern-table-compact(
+  columns: (40%, 15%, 15%, 30%),
+  caption: [ER11 - Unavailability Calculation at T=43,800h],
+  inset-y: 8pt,
+  font-size: 10pt,
+  [Basic Event], [Q∞], [Q(T)], [Downtime/5y],
+  [BE_Primary_comm_link_failure], [4.00e-4], [4.00e-4], [17.5h],
+  [BE_Ground_relay_failure], [1.60e-3], [1.60e-3], [70h],
+  [BE_Network_security_device_outage], [5.00e-4], [5.00e-4], [22h],
+  [BE_DNS_or_PKI_resolution_failure], [2.00e-4], [2.00e-4], [8.8h],
+  [BE_Safety_controller_failure], [1.00e-3], [1.00e-3], [44h],
+  [BE_Navigation_stack_failure], [4.00e-5], [4.00e-5], [1.8h],
+  [BE_Sensor_suite_failure], [4.98e-3], [4.98e-3], [218h],
+  [BE_Power_subsystem_failure], [9.90e-3], [9.90e-3], [434h],
+  [BE_Mission_control_app_outage], [2.00e-4], [2.00e-4], [8.8h],
+  [BE_Database_or_storage_outage], [5.00e-4], [5.00e-4], [22h],
+  [BE_IAM_or_IdP_outage], [2.00e-4], [2.00e-4], [8.8h],
+  [BE_Failed_deployment_or_change], [1.00e-3], [1.00e-3], [44h],
+  [BE_Cloud_region_or_DC_outage], [8.00e-4], [8.00e-4], [35h],
+  [BE_Vault_service_unavailable], [5.00e-4], [5.00e-4], [22h],
+  [BE_Certificates_expired], [2.00e-4], [2.00e-4], [8.8h],
+  [BE_KMS_unavailable], [5.00e-4], [5.00e-4], [22h],
+  [BE_HSM_unavailable], [1.00e-3], [1.00e-3], [44h],
+  [*ER11 TOTAL (OR)*], [], [*2.33e-2*], [*≈1,020h (42.5 days)*],
+)
+
+#v(1em)
+
+#danger(title: "ER11 Analysis")[
+  The calculated unavailability of *2.31%* over 5 years corresponds to approximately *42.5 days* of cumulative downtime. The main contributors are:
+  
+  1. *Power subsystem failure* (434h) — Hardware logistics dominant
+  2. *Sensor suite failure* (218h) — Field equipment exposure
+  3. *Ground relay failure* (70h) — Remote infrastructure
+
+  *Recommendation*: Implement redundancy for robot power systems and sensor suites. Consider spare parts inventory for field operations.
+]
+
+// =============================================================================
+// ER05 — Unavailability of mission data
+// =============================================================================
+
+#landscape[
+
+  === ER05 — Unavailability of Mission Data During Operation
+
+  #v(0.5em)
+
+  #danger(title: "Feared Event ER05")[
+    *Description*: Unavailability of data required to conduct an ongoing mission (telemetry, maps, mission parameters).
+    
+    *Severity*: G3 (Significant) — Mission degradation, potential safety impact
+    
+    *Business Impact*: PM-01 with RTO = 2 hours, RPO = 15 minutes
+  ]
+
+  #v(0.5em)
+
+  #figure(
+    image(img.fta-er05, width: 100%),
+    caption: [ER05 Fault Tree: Unavailability of mission data during operation. Severity G3 (Significant). $Q(T) approx 0.22%$. OR-gate with 5 basic events (GLM model).],
+  ) <fig-er05-fta>
+
+  #v(0.5em)
+
+  ==== Basic Events and MTBF/MTTR Justification
+
+  #v(0.5em)
+
+  #modern-table-compact(
+    columns: (26%, 14%, 30%, 30%),
+    caption: [ER05 - Basic Events with MTBF/MTTR Justification],
+    inset-y: 14pt,
+    font-size: 10pt,
+    [Basic Event], [Parameters], [MTBF/Gamma Justification], [MTTR Budget],
+
+    [BE_Mission_data_store_unavailable], [- MTBF=10,000h
+    - MTTR=5h], [Data store stable; incidents possible (service/cluster failure).], [Alert 0.25h + Diag 0.75h + Restore/failover 3h + Validation 1h],
+
+    [BE_Network_path_down], [- MTBF=10,000h
+    - MTTR=4h], [Critical network: occasional incidents (operator, route, equipment).], [TTD 0.25h + Diag 0.75h + Recovery 2h + Validation 1h],
+
+    [BE_Access_control_outage], [- MTBF=10,000h
+    - MTTR=2h], [IAM/Vault/PKI critical; incidents rare but blocking.], [Alert 0.1h + Diag 0.4h + Remediation 1h + Validation 0.5h],
+
+    [BE_Data_corruption_requires_stop], [- Gamma=3e-4
+    - MTTR=24h], [Corruption rare but plausible (bug, human error, integrity issue).], [Triage 2h + Restore/rollback 8h + Integrity checks 10h + Validation 4h],
+
+    [BE_Cloud_region_or_DC_outage], [- MTBF=100,000h
+    - MTTR=80h], [Very rare, high impact (single-site dependency).], [Alert 1h + Decision 3h + DR recovery 72h + Validation 4h],
+  )
+
+  #v(1em)
+
+  ==== ER05 Quantitative Results
+
+  #v(0.5em)
+
+  #modern-table-compact(
+    columns: (40%, 20%, 20%, 20%),
+    caption: [ER05 - Unavailability Calculation at T=43,800h],
+    inset-y: 16pt,
+    font-size: 10pt,
+    [Basic Event], [Q∞ / Gamma], [Q(T)], [Downtime/5y],
+    [BE_Mission_data_store_unavailable], [5.00e-4], [5.00e-4], [22h],
+    [BE_Network_path_down], [4.00e-4], [4.00e-4], [17.5h],
+    [BE_Access_control_outage], [2.00e-4], [2.00e-4], [8.8h],
+    [BE_Data_corruption_requires_stop], [3.00e-4], [3.00e-4], [13h],
+    [BE_Cloud_region_or_DC_outage], [8.00e-4], [8.00e-4], [35h],
+    [*ER05 TOTAL (OR)*], [], [*2.20e-3*], [*≈96h (4 days)*],
+  )
+
+  #v(1em)
+
+  #success(title: "ER05 Analysis")[
+    Unavailability of *0.22%* over 5 years (≈4 days cumulative) is acceptable given the PM-01 RTO of 2 hours *per incident*. The dominant risk is cloud region outage which requires DR site capability.
+  ]
+
+  #pagebreak()
+
+  // =============================================================================
+  // ER12 — Malicious takeover of a robot
+  // =============================================================================
+
+  === ER12 — Malicious Takeover of Robot During Mission
+
+  #v(0.5em)
+
+  #danger(title: "Feared Event ER12")[
+    *Description*: Intentional takeover of a robot by an attacker during a mission, allowing malicious commands or data exfiltration.
+    
+    *Severity*: G4 (Critical) — Safety risk, potential weaponization
+    
+    *Business Impact*: Immediate mission abort, reputational damage, regulatory consequences
+  ]
+
+  #v(0.5em)
+
+  #figure(
+    image(img.fta-er12, width: 100%),
+    caption: [ER12 Fault Tree: Malicious takeover of robot during mission. Severity G4 (Critical). $Q(T) approx 0.29%$. Mixed GLM + Gamma model with 5 basic events.],
+  ) <fig-er12-fta>
+
+  #v(0.5em)
+
+  ==== Basic Events and Parameter Justification
+
+  #v(0.5em)
+
+  #modern-table-compact(
+    columns: (26%, 16%, 29%, 29%),
+    caption: [ER12 - Basic Events with GLM/Gamma Justification],
+    inset-y: 14pt,
+    font-size: 10pt,
+    [Basic Event], [Parameters], [MTBF/Gamma Justification], [MTTR Budget],
+
+    [BE_Command_channel_compromise], [- MTBF=10,000h
+    - MTTR=4h], [Treated as availability loss of secure channel (auth/VPN).], [Alert 0.25h + Diag 0.75h + Recovery 2h + Validation 1h],
+
+    [BE_Robot_endpoint_compromise], [- MTBF=10,000h
+    - MTTR=20h], [Conservative: incident requiring reflash/hardening + tests.], [Triage 2h + Image restore/reflash 12h + Tests/requalification 6h],
+
+    [BE_Firmware_compromise], [- Gamma=2e-4
+    - MTTR=48h], [Rare intentional event if robust signature chain.], [Analysis 6h + Rollback 18h + Re-sign/redeploy 18h + Validation 6h],
+
+    [BE_Key_impersonation], [- Gamma=2e-4
+    - MTTR=72h], [Rare if HSM+rotation, but major impact (impersonation).], [Investigation 8h + Key rotation 24h + Re-enrollment 24h + Validation 16h],
+
+    [BE_Operator_workstation_compromise], [- Gamma=1e-4
+    - MTTR=24h], [Admin/operator workstation: residual risk low but non-zero.], [Detection 2h + Workstation remediation 8h + Access rotation 8h + Validation 6h],
+  )
+
+]
+
+==== ER12 Quantitative Results
+
+#v(0.5em)
+
+#modern-table-compact(
+  columns: (38%,18%, 18%, 26%),
+  caption: [ER12 - Unavailability/Probability Calculation at T=43,800h],
+  inset-y: 14pt,
+  font-size: 9pt,
+  [Basic Event], [Q∞ / Gamma], [Q(T)], [Impact/5y],
+  [BE_Command_channel_compromise], [4.00e-4], [4.00e-4], [17.5h downtime],
+  [BE_Robot_endpoint_compromise], [2.00e-3], [2.00e-3], [87.6h downtime],
+  [BE_Firmware_compromise], [2.00e-4], [2.00e-4], [Low probability event],
+  [BE_Key_impersonation], [2.00e-4], [2.00e-4], [Low probability event],
+  [BE_Operator_workstation_compromise], [1.00e-4], [1.00e-4], [Low probability event],
+  [*ER12 TOTAL (OR)*], [], [*2.89e-3*], [*≈127h (5.3 days)*],
+)
+
+#v(1em)
+
+#warning(title: "ER12 Analysis")[
+  The *0.29%* probability combines both availability-based failures (command channel, endpoint) and security events (firmware, key, operator compromise). The security events use Gamma model because they represent deliberate attacks that occur at most once but have extended recovery times.
+]
+
+// =============================================================================
+// ER04 — Theft of firmware signing keys
+// =============================================================================
+
+#landscape[
+
+  === ER04 — Theft of Firmware Signing Keys
+
+  #v(0.5em)
+
+  #danger(title: "Feared Event ER04")[
+    *Description*: Compromise of firmware signing keys enabling creation of fraudulent firmware that could be deployed to robots.
+    
+    *Severity*: G4 (Critical) — Enables persistent, undetectable compromise of entire fleet
+    
+    *Business Impact*: Complete loss of firmware integrity assurance, potential supply chain attack
+  ]
+
+  #v(0.5em)
+
+  #figure(
+    image(img.fta-er04, width: 100%),
+    caption: [ER04 Fault Tree: Theft of firmware signing keys enabling fraudulent firmware creation. Severity G4 (Critical). $Q(T) approx 0.09%$. Gamma model with 5 basic events.],
+  ) <fig-er04-fta>
+
+  #v(0.5em)
+
+  ==== Basic Events and Gamma/MTTR Justification
+
+  All basic events use the Gamma model as they represent intentional security compromise events.
+
+  #v(0.5em)
+
+  #modern-table-compact(
+    columns: (28%, 8%, 8%, 28%, 28%),
+    caption: [ER04 - Basic Events with Gamma/MTTR Justification],
+    inset-y: 14pt,
+    font-size: 9pt,
+    [Basic Event], [Gamma], [MTTR], [Gamma Justification], [MTTR Budget],
+
+    [BE_HSM_compromise], [2e-4], [72h], [Rare (HSM + access control + audit logging).], [Investigation + key rotation + re-sign + deploy + validation],
+
+    [BE_Key_backup_compromise], [1e-4], [72h], [Rare if encrypted backups, offsite, role separation.], [Rotation + audit + regeneration + revalidation],
+
+    [BE_CICD_signing_pipeline_compromise], [2e-4], [48h], [Supply chain risk / CI/CD tokens (larger attack surface).], [Patch pipeline + rotate secrets + rebuild + validation],
+
+    [BE_Admin_credential_theft_enabling_export], [3e-4], [48h], [Identity attack surface more probable than direct HSM attack.], [Rotate accounts + MFA + invalidate sessions + audit + validation],
+
+    [BE_Insider_misuse_privileged_operator], [1e-4], [96h], [Low if SoD/4-eyes, but residual risk remains.], [Investigation + HR/legal measures + requalification + validation],
+  )
+
+]
+
+==== ER04 Quantitative Results
+
+#v(0.5em)
+
+#modern-table-compact(
+  columns: (50%, 15%, 35%),
+  caption: [ER04 - Probability Calculation],
+  inset-y: 14pt,
+  font-size: 10pt,
+  [Basic Event], [Gamma], [Recovery Impact],
+  [BE_HSM_compromise], [2.00e-4], [72h full key rotation],
+  [BE_Key_backup_compromise], [1.00e-4], [72h backup audit + rotation],
+  [BE_CICD_signing_pipeline_compromise], [2.00e-4], [48h pipeline rebuild],
+  [BE_Admin_credential_theft_enabling_export], [3.00e-4], [48h identity remediation],
+  [BE_Insider_misuse_privileged_operator], [1.00e-4], [96h investigation + remediation],
+  [*ER04 TOTAL (OR)*], [*9.00e-4*], [*≈39h weighted average*],
+)
+
+#v(0.5em)
+
+#info(title: "ER04 Analysis")[
+  The *0.09%* probability over 5 years is acceptable given the critical nature of firmware signing keys. The dominant attack vector is *admin credential theft* (3e-4), highlighting the importance of:
+  - Strong MFA for all privileged accounts
+  - Separation of duties for key operations
+  - Regular access reviews and audit logging
+]
+
+#landscape[
+
+  // =============================================================================
+  // ER02 — Malicious alteration of AI models
+  // =============================================================================
+
+  === ER02 — Malicious Alteration of AI Models (Backdoor/Bias)
+
+  #v(0.5em)
+
+  #danger(title: "Feared Event ER02")[
+    *Description*: Intentional alteration of AI models (SLAM, victim detection) introducing backdoors or biases that could cause mission failures or safety incidents.
+    
+    *Severity*: G4 (Critical) — Subtle, hard-to-detect compromise affecting core autonomy
+    
+    *Business Impact*: Loss of AI model integrity, potential regulatory consequences for safety-critical AI
+  ]
+
+  #v(0.5em)
+
+  #figure(
+    image(img.fta-er02, width: 100%),
+    caption: [ER02 Fault Tree: Malicious alteration of AI models (backdoor/bias) affecting SLAM or victim detection. Severity G4 (Critical). $Q(T) approx 0.09%$. Gamma model with 5 basic events.],
+  ) <fig-er02-fta>
+
+  #v(0.5em)
+
+  ==== Basic Events and Gamma/MTTR Justification
+
+  #v(0.5em)
+
+  #modern-table-compact(
+    columns: (28%, 8%, 8%, 28%, 28%),
+    caption: [ER02 - Basic Events with Gamma/MTTR Justification],
+    inset-y: 14pt,
+    font-size: 9pt,
+    [Basic Event], [Gamma], [MTTR], [Gamma Justification], [MTTR Budget],
+
+    [BE_Model_registry_compromise], [2e-4], [48h], [Rare if registry isolated + access control + audit.], [Rollback version + rotate secrets + revalidation + redeploy],
+
+    [BE_Training_pipeline_poisoning], [3e-4], [72h], [Larger surface (data + pipeline) → higher probability.], [Purge dataset + retrain + tests + redeploy + validation],
+
+    [BE_Artifact_signing_bypass], [1e-4], [48h], [Low if systematic signatures, but misconfiguration possible.], [Restore controls + re-sign + audit + validation],
+
+    [BE_Insider_model_injection], [1e-4], [96h], [Low if dual validation/SoD, but critical impact.], [Investigation + remove model + full requalification + validation],
+
+    [BE_Dependency_supply_chain_compromise], [2e-4], [72h], [Third-party risk (packages, containers, runners).], [Patch/upgrade + rebuild images + tests + validation],
+  )
+
+]
+==== ER02 Quantitative Results
+
+#v(0.5em)
+
+#modern-table-compact(
+  columns: (50%, 15%, 35%),
+  caption: [ER02 - Probability Calculation],
+  inset-y: 14pt,
+  font-size: 10pt,
+  [Basic Event], [Gamma], [Recovery Impact],
+  [BE_Model_registry_compromise], [2.00e-4], [48h model rollback + validation],
+  [BE_Training_pipeline_poisoning], [3.00e-4], [72h full retrain cycle],
+  [BE_Artifact_signing_bypass], [1.00e-4], [48h signature restoration],
+  [BE_Insider_model_injection], [1.00e-4], [96h investigation + requalification],
+  [BE_Dependency_supply_chain_compromise], [2.00e-4], [72h dependency remediation],
+  [*ER02 TOTAL (OR)*], [*9.00e-4*], [*≈39h weighted average*],
+)
+
+#v(0.5em)
+
+#warning(title: "ER02 Analysis")[
+  The *0.09%* probability is identical to ER04, reflecting similar attack patterns. The dominant risk is *training pipeline poisoning* (3e-4) due to the large attack surface of ML training infrastructure.
+  
+  *Recommendations*:
+  - Data provenance tracking for training datasets
+  - Model integrity verification before deployment
+  - Reproducible training pipelines with artifact signing
+]
+
+#pagebreak()
+
+// =============================================================================
+// Summary and Conclusions
+// =============================================================================
+
+== Summary and Risk Synthesis
+
+#v(0.5em)
+
+=== Unavailability Summary
+
+#v(0.5em)
+
+#modern-table(
+  columns: (9%, 30%, 21%, 22%, 18%),
+  caption: [Feared Events - Unavailability Summary over 5 Years],
+  [FE], [Description], [Unavailability], [Downtime], [Severity],
+  [ER11], [Loss of robot control], [*2.31%*], [≈1,020h (42.5d)], chip("critical"),
+  [ER05], [Mission data unavailable], [*0.22%*], [≈96h (4d)], chip("high"),
+  [ER12], [Malicious robot takeover], [*0.29%*], [≈127h (5.3d)], chip("critical"),
+  [ER04], [Firmware key theft], [*0.09%*], [≈39h (1.6d)], chip("critical"),
+  [ER02], [AI model alteration], [*0.09%*], [≈39h (1.6d)], chip("critical"),
+)
+
+#v(1em)
+
+=== Risk Prioritization Matrix
+
+#v(0.5em)
+
+#modern-table(
+  columns: (14%, 12%, 44%, 30%),
+  caption: [Risk Prioritization Based on FTA Results],
+  [Priority], [Feared Event], [Key Risk Drivers], [Action],
+  [1], [ER11], [- Power subsystem (434h)
+  - Sensors (218h)
+  - Ground relay (70h)], [Redundancy + spares],
+  [2], [ER12], [- Robot endpoint (87h)
+  - Command channel (17h)], [Hardening + monitoring],
+  [3], [ER05], [- Cloud region outage (35h)
+  - Data store (22h)], [DR site + replication],
+  [4], [ER04], [- Admin credentials (3e-4)
+  - CI/CD (2e-4)], [MFA + SoD],
+  [5], [ER02], [- Training pipeline (3e-4)
+  - Supply chain (2e-4)], [ML security program],
+)
+
+#v(1em)
+
+=== Alignment with Session 2 Recovery Objectives
+
+#v(0.5em)
+
+#success(title: "FTA vs BIA Consistency Check")[
+  The FTA results are consistent with Session 2 BIA requirements:
+  
+  - *PM-01 (Mission Control)*: RTO = 2h → Most ER11 components have MTTR ≤ 4h (compatible)
+  - *Critical path*: Power subsystem (MTTR=100h) and sensors (MTTR=50h) exceed RTO → *Redundancy required*
+  - *Security events* (ER02, ER04, ER12): Extended MTTR (48-96h) acceptable as these are rare, one-time events
+]
+
+#v(1em)
+
+== Deliverables Checklist
+
+#v(0.5em)
+
+#modern-table-compact(
+  columns: (5%, 49%, 17%, 27%),
+  caption: [Session 3 Deliverables Status],
+  inset-y: 12pt,
+  [✓], [Deliverable], [Format], [Location],
+  [✓], [5 Feared Events with FTA], [OPSA files], [ER02/04/05/11/12_FTA\*.opsa],
+  [✓], [System lifetime definition], [Text], [T = 43,800h (5 years)],
+  [✓], [Probability models (GLM + Gamma)], [Text], [This document],
+  [✓], [MTBF/MTTR values with justification], [Tables], [This document + OPSA labels],
+  [✓], [MTTR budget decomposition], [Tables], [TTD + Diag + Repair + Validation],
+  [✓], [Arbre Analyst files], [OPSA], [5 files provided],
+  [✓], [Concept diagram (MTBF/MTTR/RTO/WRT)], [Draw.io], [NOV-BCRP-Session3-\*.drawio],
+)
+
+#pagebreak()
+
+== Appendix: Parameter Verification
+
+#v(0.5em)
+
+=== Mathematical Consistency Check
+
+For all GLM-based basic events, the following relationships must hold:
+
+#align(center)[
+  #box(fill: gray100, inset: 12pt, radius: 4pt)[
+    $lambda = 1/"MTBF"$ #h(2em) $mu = 1/"MTTR"$ #h(2em) $Q_infinity = lambda/(lambda + mu)$
+  ]
+]
+
+#v(0.5em)
+
+#info(title: "Verification Results")[
+  All 17 basic events for ER11 have been verified for mathematical consistency between MTBF/MTTR values stated in labels and the λ/μ parameters used in GLM calculations. No discrepancies found.
+  
+  Example verification for BE_Primary_comm_link_failure:
+  - MTBF = 10,000h → λ = 1/10,000 = 1.0×10⁻⁴ ✓
+  - MTTR = 4h → μ = 1/4 = 2.5×10⁻¹ ✓
+  - Q∞ = λ/(λ+μ) = 1.0×10⁻⁴/(1.0×10⁻⁴ + 2.5×10⁻¹) ≈ 4.0×10⁻⁴ ✓
+]
